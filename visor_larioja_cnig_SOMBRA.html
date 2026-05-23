@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="cnig" content="yes">
+
+  <title>Visualizador API‑CNIG – Delegación de La Rioja</title>
+
+  <!-- Estilos API‑CNIG -->
+  <link rel="stylesheet" href="https://componentes.cnig.es/api-core/assets/css/apiign.ol.min.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+
+  <!-- API‑CNIG -->
+  <script src="https://componentes.cnig.es/api-core/vendor/browser-polyfill.js"></script>
+  <script src="https://componentes.cnig.es/api-core/js/apiign.ol.min.js"></script>
+  <script src="https://componentes.cnig.es/api-core/js/configuration.js"></script>
+
+  <!-- Plugins -->
+  <link href="https://componentes.cnig.es/api-core/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
+  <script src="https://componentes.cnig.es/api-core/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Contenedor del mapa -->
+  <div id="mapaJS_div" class="m-container"></div>
+
+  <script>
+    // ===============================
+    // CONFIGURACIÓN DEL MAPA
+    // ===============================
+    M.proxy(false);
+
+    const mapajs = M.map({
+      container: 'mapaJS_div',
+      controls: [
+        'backgroundlayers',
+        'rotate',
+        'location',
+        'scale',
+        'panzoom',
+        'panzoombar',
+        'scaleline'
+      ],
+      center: ol.proj.fromLonLat([-2.45, 42.33]),
+      zoom: 8
+    });
+
+    // ===============================
+    // ORTOFOTO PNOA
+    // ===============================
+    const pnoa = new M.layer.WMS(
+      {
+        url: 'https://www.ign.es/wms-inspire/pnoa-ma',
+        name: 'OI.OrthoimageCoverage',
+        legend: 'Ortoimagen PNOA',
+        tiled: false,
+        visibility: true
+      },
+      {
+        format: 'image/png'
+      }
+    );
+
+    mapajs.addLayers([pnoa]);
+    pnoa.setZIndex(97);
+
+    // ===============================
+    // ✅ CAPA TESELADA – MDT LA RIOJA
+    // ===============================
+    const mdtLaRioja = new M.layer.TMS(
+      {
+        url: 'tiles_la_rioja/{z}/{x}/{y}.png',
+        name: 'MDT_La_Rioja_TMS',
+        legend: 'MDT La Rioja (teselas)',
+        projection: 'EPSG:3857',
+        minZoom: 5,
+        maxZoom: 16,
+        visibility: true
+      },
+      {
+        opacity: 0.7
+      }
+    );
+
+    mapajs.addLayers([mdtLaRioja]);
+    mdtLaRioja.setZIndex(96);
+
+    // ===============================
+    // PLUGIN SELECTOR DE CAPAS
+    // ===============================
+    const mp_selectorCapa = new M.plugin.Layerswitcher({
+      position: 'TR',
+      collapsed: false,
+      collapsible: true,
+      tooltip: 'Selector de capas',
+      showCatalog: true,
+      displayLabel: false,
+      addLayers: true,
+      statusLayers: true,
+      modeSelectLayers: 'eyes',
+      tools: ['transparency', 'legend', 'zoom', 'information', 'delete']
+    });
+
+    mapajs.addPlugin(mp_selectorCapa);
+
+  </script>
+
+</body>
+</html>
