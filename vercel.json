@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/",
+      "destination": "/visor_larioja_cnig_SOMBRA.html"
+    }
+  ]
+}
