@@ -18,6 +18,82 @@
       height: 100%;
       overflow: hidden;
     }
+
+    /* Contenedor de logos - Delegación */
+    #logo-container-dele {
+      position: fixed;
+      top: 10px;
+      left: calc(5vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      height: calc(100vh / 8);
+      background-color: transparent;
+      padding: 0;
+      border-radius: 12px;
+    }
+
+    /* Contenedor de logos - IGN */
+    #logo-container-ign {
+      position: fixed;
+      top: 30px;
+      right: calc(18vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      height: calc(100vh / 13);
+      width: auto;
+      background-color: white;
+      padding: 0;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
+
+    .logo-item {
+      height: calc(100vh / 9);
+      width: auto;
+      max-width: calc(100vw / 5);
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
+
+    #logo-container-dele .logo-item {
+      height: calc(100vh / 9);
+      max-width: calc(100vw / 9);
+    }
+
+    .logo-item:hover {
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      transition: filter 0.3s ease;
+    }
+
+    /* Contenedor de texto entre logos */
+    #logo-text-container {
+      position: fixed;
+      top: 20px;
+      left: 36%;
+      height: 10vh;
+      width: 65vh;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    #logo-text-container p {
+      margin: 0;
+      font-size: 1.8vw;
+      font-weight: bold;
+      color: #333;
+      font-family: Georgia, 'Trebuchet MS', serif;
+      letter-spacing: 0.5px;
+    }
   </style>
 
   <!-- API‑CNIG -->
@@ -31,6 +107,21 @@
 </head>
 
 <body>
+
+  <!-- Contenedor de logo Delegación -->
+  <div id="logo-container-dele">
+    <img src="Sources/imagen_Dele.png" alt="Delegación de La Rioja" class="logo-item">
+  </div>
+
+  <!-- Contenedor de logo IGN -->
+  <div id="logo-container-ign">
+    <img src="Sources/imagen_IGN.png" alt="IGN" class="logo-item">
+  </div>
+
+  <!-- Texto entre logos -->
+  <div id="logo-text-container">
+    <p>Servicio regional del IGN en La Rioja y Navarra</p>
+  </div>
 
   <!-- Contenedor del mapa -->
   <div id="mapaJS_div" class="m-container"></div>
@@ -78,13 +169,13 @@
     // ===============================
     // ✅ CAPA TESELADA – MDT LA RIOJA
     // ===============================
-    const mdtLaRioja = new M.layer.TMS(
+    const VIS_SOL_LaRioja = new M.layer.TMS(
       {
-        url: 'tiles_la_rioja/{z}/{x}/{y}.png',
-        name: 'MDT_La_Rioja_TMS',
-        legend: 'MDT La Rioja (teselas)',
+        url: 'Sources/tiles_la_rioja/{z}/{x}/{y}.png',
+        name: 'VIS_La_Rioja_TMS',
+        legend: 'Sombra La Rioja',
         projection: 'EPSG:3857',
-        minZoom: 5,
+        minZoom: 8,
         maxZoom: 16,
         visibility: true
       },
@@ -93,8 +184,8 @@
       }
     );
 
-    mapajs.addLayers([mdtLaRioja]);
-    mdtLaRioja.setZIndex(96);
+    mapajs.addLayers([VIS_SOL_LaRioja]);
+    VIS_SOL_LaRioja.setZIndex(96);
 
     // ===============================
     // PLUGIN SELECTOR DE CAPAS
