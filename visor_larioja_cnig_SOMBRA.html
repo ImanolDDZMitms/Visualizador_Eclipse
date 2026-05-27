@@ -176,11 +176,12 @@
         legend: 'Sombra La Rioja',
         projection: 'EPSG:3857',
         visibility: true,
+        opacity: 1
       },
     );
 
     mapajs.addLayers([SOMBRA_LA_RIOJA]);
-    
+    cogLaRioja.setZIndex(96);
 
     // ===============================
     // PLUGIN SELECTOR DE CAPAS
