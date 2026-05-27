@@ -1,77 +1,211 @@
-<script>
-  // ===============================
-  // CONFIGURACIÓN DEL MAPA
-  // ===============================
-  M.proxy(false);
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="cnig" content="yes">
 
-  const mapajs = M.map({
-    container: 'mapaJS_div',
-    controls: [
-      'backgroundlayers',
-      'rotate',
-      'location',
-      'scale',
-      'panzoom',
-      'panzoombar',
-      'scaleline'
-    ],
-    center: ol.proj.fromLonLat([-2.45, 42.33]),
-    zoom: 8
-  });
+  <title>Visualizador API‑CNIG – Delegación de La Rioja</title>
 
-  // ===============================
-  // ORTOFOTO PNOA
-  // ===============================
-  const pnoa = new M.layer.WMS(
-    {
-      url: 'https://www.ign.es/wms-inspire/pnoa-ma',
-      name: 'OI.OrthoimageCoverage',
-      legend: 'Ortoimagen PNOA',
-      tiled: false,
-      visibility: true
-    },
-    {
-      format: 'image/png'
+  <!-- Estilos API‑CNIG -->
+  <link rel="stylesheet" href="https://componentes.cnig.es/api-core/assets/css/apiign.ol.min.css">
+
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      overflow: hidden;
     }
-  );
 
-  mapajs.addLayers([pnoa]);
-  pnoa.setZIndex(97);
-
-  // ===============================
-  // ✅ COG – MDT / SOMBRA LA RIOJA
-  // ===============================
-  const cogLaRioja = new M.layer.GeoTIFF(
-    {
-      url: 'source/salida_3857_COG.tif',
-      name: 'COG_La_Rioja',
-      legend: 'Sombra La Rioja (COG)',
-      projection: 'EPSG:3857',
-      visibility: true
-    },
-    {
-      opacity: 0.7
+    /* Contenedor de logos - Delegación */
+    #logo-container-dele {
+      position: fixed;
+      top: 10px;
+      left: calc(5vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      height: calc(100vh / 8);
+      background-color: transparent;
+      padding: 0;
+      border-radius: 12px;
     }
-  );
 
-  mapajs.addLayers([cogLaRioja]);
-  cogLaRioja.setZIndex(96);
+    /* Contenedor de logos - IGN */
+    #logo-container-ign {
+      position: fixed;
+      top: 30px;
+      right: calc(18vw);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1001;
+      height: calc(100vh / 13);
+      width: auto;
+      background-color: white;
+      padding: 0;
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      overflow: hidden;
+    }
 
-  // ===============================
-  // PLUGIN SELECTOR DE CAPAS
-  // ===============================
-  const mp_selectorCapa = new M.plugin.Layerswitcher({
-    position: 'TR',
-    collapsed: false,
-    collapsible: true,
-    tooltip: 'Selector de capas',
-    showCatalog: true,
-    displayLabel: false,
-    addLayers: true,
-    statusLayers: true,
-    modeSelectLayers: 'eyes',
-    tools: ['transparency', 'legend', 'zoom', 'information', 'delete']
-  });
+    .logo-item {
+      height: calc(100vh / 9);
+      width: auto;
+      max-width: calc(100vw / 5);
+      object-fit: contain;
+      filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+    }
 
-  mapajs.addPlugin(mp_selectorCapa);
-</script>
+    #logo-container-dele .logo-item {
+      height: calc(100vh / 9);
+      max-width: calc(100vw / 9);
+    }
+
+    .logo-item:hover {
+      filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+      transition: filter 0.3s ease;
+    }
+
+    /* Contenedor de texto entre logos */
+    #logo-text-container {
+      position: fixed;
+      top: 20px;
+      left: 36%;
+      height: 10vh;
+      width: 65vh;
+      transform: translateX(-50%);
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 12px;
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
+      z-index: 1001;
+      text-align: center;
+      pointer-events: none;
+    }
+
+    #logo-text-container p {
+      margin: 0;
+      font-size: 1.8vw;
+      font-weight: bold;
+      color: #333;
+      font-family: Georgia, 'Trebuchet MS', serif;
+      letter-spacing: 0.5px;
+    }
+  </style>
+
+  <!-- API‑CNIG -->
+  <script src="https://componentes.cnig.es/api-core/vendor/browser-polyfill.js"></script>
+  <script src="https://componentes.cnig.es/api-core/js/apiign.ol.min.js"></script>
+  <script src="https://componentes.cnig.es/api-core/js/configuration.js"></script>
+
+  <!-- Plugins -->
+  <link href="https://componentes.cnig.es/api-core/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
+  <script src="https://componentes.cnig.es/api-core/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
+</head>
+
+<body>
+
+  <!-- Contenedor de logo Delegación -->
+  <div id="logo-container-dele">
+    <img src="Imagen_Dele.png" alt="Delegación de La Rioja" class="logo-item">
+  </div>
+
+  <!-- Contenedor de logo IGN -->
+  <div id="logo-container-ign">
+    <img src="Imagen_IGN.png" alt="IGN" class="logo-item">
+  </div>
+
+  <!-- Texto entre logos -->
+  <div id="logo-text-container">
+    <p>Servicio regional del IGN en La Rioja y Navarra</p>
+  </div>
+
+  <!-- Contenedor del mapa -->
+  <div id="mapaJS_div" class="m-container"></div>
+
+  <script>
+    // ===============================
+    // CONFIGURACIÓN DEL MAPA
+    // ===============================
+    M.proxy(false);
+
+    const mapajs = M.map({
+      container: 'mapaJS_div',
+      controls: [
+        'backgroundlayers',
+        'rotate',
+        'location',
+        'scale',
+        'panzoom',
+        'panzoombar',
+        'scaleline'
+      ],
+      center: ol.proj.fromLonLat([-2.45, 42.33]),
+      zoom: 8
+    });
+
+    // ===============================
+    // ORTOFOTO PNOA
+    // ===============================
+    const pnoa = new M.layer.WMS(
+      {
+        url: 'https://www.ign.es/wms-inspire/pnoa-ma',
+        name: 'OI.OrthoimageCoverage',
+        legend: 'Ortoimagen PNOA',
+        tiled: false,
+        visibility: true
+      },
+      {
+        format: 'image/png'
+      }
+    );
+
+    mapajs.addLayers([pnoa]);
+    pnoa.setZIndex(97);
+
+    // ===============================
+    // ✅ CAPA TESELADA – MDT LA RIOJA
+    // ===============================
+    const VIS_SOL_LaRioja = new M.layer.TMS(
+      {
+        url: 'Sources/tiles_la_rioja/{z}/{x}/{y}.png',
+        name: 'VIS_La_Rioja_TMS',
+        legend: 'Sombra La Rioja',
+        projection: 'EPSG:3857',
+        minZoom: 8,
+        maxZoom: 16,
+        visibility: true
+      },
+      {
+        opacity: 0.7
+      }
+    );
+
+    mapajs.addLayers([VIS_SOL_LaRioja]);
+    VIS_SOL_LaRioja.setZIndex(96);
+
+    // ===============================
+    // PLUGIN SELECTOR DE CAPAS
+    // ===============================
+    const mp_selectorCapa = new M.plugin.Layerswitcher({
+      position: 'TR',
+      collapsed: false,
+      collapsible: true,
+      tooltip: 'Selector de capas',
+      showCatalog: true,
+      displayLabel: false,
+      addLayers: true,
+      statusLayers: true,
+      modeSelectLayers: 'eyes',
+      tools: ['transparency', 'legend', 'zoom', 'information', 'delete']
+    });
+
+    mapajs.addPlugin(mp_selectorCapa);
+
+  </script>
+
+</body>
+</html>
