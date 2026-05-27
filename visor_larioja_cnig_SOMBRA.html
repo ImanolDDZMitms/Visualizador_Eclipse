@@ -169,23 +169,23 @@
     // ===============================
     // ✅ CAPA TESELADA – MDT LA RIOJA
     // ===============================
-    const VIS_SOL_LaRioja = new M.layer.TMS(
+    const SOMBRA_LA_RIOJA = new M.layer.GeoTIFF(
       {
-        url: 'Sources/tiles_la_rioja/{z}/{x}/{y}.png',
-        name: 'VIS_La_Rioja_TMS',
+        url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/salida_3857_COG.tif',
+        name: 'SOMBRA_LA_RIOJA',
         legend: 'Sombra La Rioja',
         projection: 'EPSG:3857',
         minZoom: 8,
         maxZoom: 16,
-        visibility: true
+        visibility: true,
       },
       {
         opacity: 0.7
       }
     );
 
-    mapajs.addLayers([VIS_SOL_LaRioja]);
-    VIS_SOL_LaRioja.setZIndex(96);
+    mapajs.addLayers([SOMBRA_LA_RIOJA]);
+    SOMBRA_LA_RIOJA.setZIndex(96);
 
     // ===============================
     // PLUGIN SELECTOR DE CAPAS
