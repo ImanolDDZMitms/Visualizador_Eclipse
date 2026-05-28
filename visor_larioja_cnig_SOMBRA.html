@@ -13,10 +13,8 @@
   <link rel="stylesheet"
         href="https://componentes.idee.es/api-idee/assets/css/apiidee.ol.min.css">
 
-  <!-- ===== CSS Layerswitcher ===== -->
-  <link rel="stylesheet"
-        href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css">
-
+  <!-- ===== MOUSE SRS ===== -->
+  <link href="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs-1.0.0.ol.min.css" rel="stylesheet" />
   <style>
     html, body {
       margin: 0;
@@ -37,8 +35,9 @@
 <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
 
-<!-- ===== PLUGIN LAYERSWITCHER ===== -->
-<script src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
+
+<!-- ===== PLUGIN MOUSERSRS ===== -->
+<script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs.ol.min.js"></script>
 
 <script>
 /************************************************
@@ -75,6 +74,7 @@ const capaCOG = new IDEE.layer.GeoTIFF(
 
 // Por delante en index 10, index 0 (al fondo)
 capaCOG.setZIndex(10);
+mapa.addLayers(capaCOG);
 
 /************************************************
  * 3. COORDENADAS
@@ -87,7 +87,7 @@ capaCOG.setZIndex(10);
   label: 'WGS84',
   precision: 4,
 });
-
+mapa.addPlugin(mp);
 
 
 
