@@ -76,6 +76,20 @@ const capaCOG = new IDEE.layer.GeoTIFF(
 // Por delante en index 10, index 0 (al fondo)
 capaCOG.setZIndex(10);
 
+/************************************************
+ * 3. COORDENADAS
+ ************************************************/
+
+ const mp = new IDEE.plugin.MouseSRS({
+  position: 'BL',
+  tooltip: 'Muestra coordenadas',
+  srs: 'EPSG:4326',
+  label: 'WGS84',
+  precision: 4,
+});
+
+
+
 
 </script>
 
