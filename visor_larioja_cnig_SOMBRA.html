@@ -57,34 +57,3 @@ const mapa = IDEE.map({
   ]
 });
 
-/************************************************
- * 2. CAPA PNOA (VISIBLE CLARA)
- ************************************************/
-const pnoa = new IDEE.layer.WMS(
-  {
-    url: 'https://www.ign.es/wms/pnoa-historico?',
-    name: 'PNOA',
-    legend: 'Ortofoto PNOA',
-    tiled: true
-  },
-  {
-    visibility: true
-  }
-);
-
-mapa.addLayers(pnoa);
-
-/************************************************
- * 3. LAYERSWITCHER
- ************************************************/
-const layerswitcher = new IDEE.plugin.Layerswitcher({
-  collapsed: false,
-  collapsible: true
-});
-
-mapa.addPlugin(layerswitcher);
-
-</script>
-
-</body>
-</html>
