@@ -42,7 +42,7 @@
 
 <script>
 /************************************************
- * 1. CREAR MAPA BASE
+ * 1. MAPA BASE
  ************************************************/
 const mapa = IDEE.map({
   container: 'mapa',
@@ -56,6 +56,25 @@ const mapa = IDEE.map({
     'backgroundlayers'
   ]
 });
+
+/************************************************
+ * 2. COG DIRECTO SOBRE EL MAPA
+ ************************************************/
+const capaCOG = new IDEE.layer.Raster(
+  {
+    
+    url: 'https://https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/salida_3857_COG_visual.tif',
+
+    name: 'Visibilidad La Rioja',
+    legend: 'Visibilidad La Rioja'
+  },
+  {
+    visibility: true
+  }
+);
+
+// Por delante en index 10, index 0 (al fondo)
+capaCOG.setZIndex(10);
 
 
 </script>
