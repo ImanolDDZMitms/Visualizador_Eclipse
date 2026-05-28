@@ -1,37 +1,27 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <meta name="viewport"
-        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="cnig" content="yes" />
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="cnig" content="yes">
 
-  <title>Visor IDE – La Rioja (EPSG:3857)</title>
+  <title>Visor API‑IDEE – Prueba</title>
 
-  <!-- CSS API-IDEE -->
-  https://componentes.idee.es/api-idee/assets/css/apiidee.ol.min.css
+  <!-- ✅ CSS API‑IDEE -->
+  <link rel="stylesheet"
+        href="https://componentes.idee.es/api-idee/assets/css/apiidee.ol.min.css">
 
-  <!-- CSS Layerswitcher -->
-  https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css
+  <!-- ✅ CSS Layerswitcher -->
+  <link rel="stylesheet"
+        href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css">
 
   <style>
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
-      overflow: hidden;
-    }
-
-    .g-visibilidad {
-      max-width: 320px;
-    }
-
-    @media (max-width: 768px) {
-      .g-visibilidad {
-        max-width: 90vw;
-        font-size: 14px;
-      }
     }
   </style>
 </head>
@@ -40,178 +30,21 @@
 
 <div id="mapa" class="m-container"></div>
 
-<!-- JS API-IDEE -->
-https://componentes.idee.es/api-idee/vendor/browser-polyfill.jsscript>
-https://componentes.idee.es/api-idee/js/apiidee.ol.min.jsscript>
-https://componentes.idee.es/api-idee/js/configuration.jsscript>
+<!-- ✅ JS API‑IDEE -->
+<script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
+<script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
+<script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
 
-<!-- Plugin Layerswitcher -->
-https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.jsscript>
+<!-- ✅ Plugin Layerswitcher -->
+<script src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
 <script>
-/********************************************************
- * SISTEMA DE REFERENCIA ÚNICO
- * CRS GLOBAL: EPSG:3857 (Web Mercator)
- ********************************************************/
-
-/********************************************************
- * 1. MAPA BASE (EPSG:3857)
- ********************************************************/
-const mapa = IDEE.map({
-  container: 'mapa',
-  zoom: 8,
-  minZoom: 6,
-  maxZoom: 18,
-
-  // Centro de La Rioja en EPSG:3857
-  center: [-273000, 5202000],
-
-  controls: [
-    'panzoom',
-    'scale*true',
-    'scaleline',
-    'location',
-    'backgroundlayers'
-  ]
-});
-
-/********************************************************
- * 2. BOUNDING BOX LA RIOJA (EPSG:3857)
- ********************************************************/
-const BBOX_LA_RIOJA = [
-  -315000, 5150000,  // minX, minY
-  -230000, 5250000   // maxX, maxY
-];
-
-const vista = mapa.getMapImpl().getView();
-vista.setExtent(BBOX_LA_RIOJA);
-
-vista.fit(BBOX_LA_RIOJA, {
-  size: mapa.getMapImpl().getSize(),
-  padding: [20, 20, 20, 20],
-  maxZoom: 10
-});
-
-/********************************************************
- * 3. CAPA BASE PNOA (EPSG:3857)
- ********************************************************/
-const pnoa = new IDEE.layer.WMS({
-  url: 'https://www.ign.es/wms/pnoa-historico?',
-  name: 'PNOA',
-  legend: 'Ortofoto PNOA',
-  tiled: true
-});
-pnoa.setZIndex(0);
-mapa.addLayers(pnoa);
-
-/********************************************************
- * 4. POLÍGONO LA RIOJA – GEOJSON EN EPSG:3857
- ********************************************************/
-const geojsonLaRioja3857 = {
-  "type": "FeatureCollection",
-  "features": [{
-    "type": "Feature",
-    "properties": { "nombre": "La Rioja" },
-    "geometry": {
-      "type": "Polygon",
-      "coordinates": [[
-        [-315000, 5250000],
-        [-230000, 5250000],
-        [-230000, 5150000],
-        [-315000, 5150000],
-        [-315000, 5250000]
-      ]]
-    }
-  }]
-};
-
-const capaLaRioja = new IDEE.layer.GeoJSON({
-  source: geojsonLaRioja3857,
-  name: 'Límite La Rioja',
-  legend: 'Límite autonómico',
-  extract: true,
-  displayInLayerSwitcher: false
-});
-
-capaLaRioja.setStyle(new IDEE.style.Generic({
-  polygon: {
-    fill: { color: '#FFFFFF', opacity: 0 },
-    stroke: { color: '#C00000', width: 2 }
-  }
-}));
-
-capaLaRioja.setZIndex(200);
-mapa.addLayers(capaLaRioja);
-
-/********************************************************
- * 5. CAPA COG VISIBILIDAD (EPSG:3857)
- ********************************************************/
-const capaCOG = new IDEE.layer.Raster({
-  url: 'RUTA_A_TU_COG_VISIBILIDAD_RIOJA.tif',
-  name: 'Visibilidad La Rioja',
-  legend: 'Visibilidad La Rioja',
-  displayInLayerSwitcher: false
-});
-capaCOG.setZIndex(100);
-mapa.addLayers(capaCOG);
-
-/********************************************************
- * 6. VISIBILIDAD POR ZOOM (EPSG:3857)
- ********************************************************/
-function actualizarCOG() {
-  const zoom = mapa.getZoom();
-  const visible = zoom >= 8 && zoom <= 12;
-  capaCOG.setVisible(visible);
-  checkbox.checked = visible;
-}
-vista.on('change:resolution', actualizarCOG);
-
-/********************************************************
- * 7. PANEL VISIBILIDAD + OPACIDAD
- ********************************************************/
-const esMovil = window.innerWidth <= 768;
-
-const panelVisibilidad = new IDEE.ui.Panel('panelVisibilidad', {
-  collapsible: true,
-  collapsed: esMovil,
-  position: esMovil ? 'BR' : 'TR',
-  className: 'g-visibilidad'
-});
-mapa.addPanel(panelVisibilidad);
-
-const cont = document.createElement('div');
-cont.style.padding = '8px';
-
-const checkbox = document.createElement('input');
-checkbox.type = 'checkbox';
-checkbox.checked = true;
-checkbox.onchange = () => capaCOG.setVisible(checkbox.checked);
-
-cont.appendChild(checkbox);
-cont.appendChild(document.createTextNode(' Visibilidad La Rioja'));
-
-const slider = document.createElement('input');
-slider.type = 'range';
-slider.min = 0;
-slider.max = 100;
-slider.value = 100;
-slider.style.width = '100%';
-slider.oninput = () => capaCOG.setOpacity(slider.value / 100);
-
-cont.appendChild(slider);
-panelVisibilidad.getControls().appendChild(cont);
-
-/********************************************************
- * 8. LAYERSWITCHER
- ********************************************************/
-const layerswitcher = new IDEE.plugin.Layerswitcher({
-  collapsed: esMovil,
-  collapsible: true
-});
-mapa.addPlugin(layerswitcher);
-
-/* Inicial */
-actualizarCOG();
+  // PRUEBA MÍNIMA
+  const mapa = IDEE.map({
+    container: 'mapa',
+    zoom: 6,
+    center: [-273000, 5202000]
+  });
 </script>
 
 </body>
