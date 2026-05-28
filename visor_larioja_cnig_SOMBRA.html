@@ -22,6 +22,69 @@
       height: 100%;
       overflow: hidden;
     }
+
+    /* ===== CABECERA IGN ===== */
+#cabecera-ign {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: Arial, sans-serif;
+  max-width: calc(100vw - 20px);
+}
+
+/* Texto principal */
+.titulo-ign {
+  background-color: rgba(255, 255, 255, 0.95);
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+  white-space: nowrap;
+}
+
+/* Icono información */
+.info-ign {
+  width: 32px;
+  height: 32px;
+  background-color: #0065a3; /* azul IGN */
+  color: #fff;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 32px;
+  font-weight: bold;
+  text-decoration: none;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+/* ===== MÓVIL ===== */
+@media (max-width: 768px) {
+
+  #cabecera-ign {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+
+  .titulo-ign {
+    font-size: 13px;
+    white-space: normal;
+    line-height: 1.2;
+  }
+
+  .info-ign {
+    width: 36px;
+    height: 36px;
+    line-height: 36px;
+    font-size: 16px;
+  }
+}
+
   </style>
 </head>
 
@@ -29,6 +92,23 @@
 
 <!-- CONTENEDOR DEL MAPA -->
 <div id="mapa" class="m-container"></div>
+
+<!-- ===== CABECERA INSTITUCIONAL ===== -->
+<div id="cabecera-ign">
+
+  <div class="titulo-ign">
+    Servicio regional del IGN en La Rioja
+  </div>
+
+  <a class="info-ign"
+     href="source/informacion.pdf"
+     target="_blank"
+     aria-label="Información">
+    i
+  </a>
+
+</div>
+
 
 <!-- ===== JS API‑IDEE (ORDEN CORRECTO) ===== -->
 <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
