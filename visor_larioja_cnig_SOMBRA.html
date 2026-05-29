@@ -164,9 +164,7 @@ const CCAA = new IDEE.GeoJSON({
               url: "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA RIOJA(web mercator).geojson",
             
           });
-
-          
-          
+     
           // Configuracion de estilos CCAA
           let estilo1 = new IDEE.style.Polygon({
             fill: {
@@ -183,8 +181,8 @@ const CCAA = new IDEE.GeoJSON({
           // Asignamos el estilo a la capa
           
           CCAA.setStyle(estilo1);
-
-          mapjs.addLayers([CCAA]);
+          CCAA.setZIndex(20);
+          mapa.addLayers([CCAA]);
        
 
 
