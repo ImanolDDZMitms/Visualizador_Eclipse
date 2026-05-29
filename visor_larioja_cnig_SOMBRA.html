@@ -155,9 +155,56 @@ const capaCOG = new IDEE.layer.GeoTIFF(
 capaCOG.setZIndex(10);
 capaCOG.setOpacity(0.7)
 mapa.addLayers(capaCOG);
+/************************************************
+ * 3. GEOJSON CCAA
+ ************************************************/
+
+const CCAA = new IDEE.GeoJSON({
+              name: "COMUNIDAD AUTONOMA DE LA RIOJA", 
+              url: "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA RIOJA(web mercator).geojson",
+            
+          });
+
+          
+          
+          // Configuracion de estilos CCAA
+          let estilo1 = new IDEE.style.Polygon({
+            fill: {
+              color: 'green',
+              opacity: 0.5,
+            },
+            stroke: {
+              color: '#FF0000',
+              width: 0.5
+            }
+          });	
+        
+        
+          // Asignamos el estilo a la capa
+          
+          CCAA.setStyle(estilo1);
+
+          mapjs.addLayers([CCAA]);
+       
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 /************************************************
- * 3. COORDENADAS
+ * 3. COORDENADAS MOUSERSRS
  ************************************************/
 
  const mp = new IDEE.plugin.MouseSRS({
