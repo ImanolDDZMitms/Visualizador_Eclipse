@@ -166,25 +166,19 @@ mapa.addLayers(capaCOG);
  * 3. GEOJSON CCAA
  ************************************************/
 
-const CCAA = new IDEE.layer.Vector({
-        name: "COMUNIDAD AUTONOMA DE LA RIOJA", 
-        url: "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA RIOJA(web mercator).geojson",
-        format: new IDEE.format.GeoJSON() // Así indicamos que lea formato GeoJSON
-        }, {
-        visibility: true
-          });
+const CCAA = new ol.layer.Vector({
+          source: new ol.source.Vector({
+            format: new ol.format.GeoJSON(),
+            url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA RIOJA(web mercator).geojson',
+            strategy: ol.loadingstrategy.bbox,
+          }),
+        });
 
-        // Configuración de estilos (Se mantiene igual)
-        let estilo1 = new IDEE.setStyle({
-          fill: { color: 'green', opacity: 0.5 },
-          stroke: { color: '#FF0000', width: 0.5 }
-          });
-        
-          // Asignamos el estilo a la capa
-          
-          CCAA.setStyle(estilo1);
-          CCAA.setZIndex(20);
-          mapa.addLayers([CCAA]);
+        const GenericVector = new IDEE.layer.GenericVector({}, {}, CCAA)
+
+        mapa.addLayers(GenericVector)
+
+
        
 
 
