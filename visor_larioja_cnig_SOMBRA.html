@@ -145,7 +145,7 @@ const mapa = IDEE.map({
 /************************************************
  * 2. COG DIRECTO SOBRE EL MAPA
  ************************************************/
-const capaCOG = new IDEE.layer.GeoTIFF(
+const capaCOG = new IDEE.Layer.GeoTIFF(
   {
     
     url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/salida_3857_COG_visual.tif',
@@ -166,7 +166,7 @@ mapa.addLayers(capaCOG);
  * 3. GEOJSON CCAA
  ************************************************/
 
-const CCAA = new IDEE.Vector({
+const CCAA = new IDEE.Layer.Vector({
         name: "COMUNIDAD AUTONOMA DE LA RIOJA", 
         url: "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA RIOJA(web mercator).geojson",
         format: new IDEE.format.GeoJSON() // Así indicamos que lea formato GeoJSON
