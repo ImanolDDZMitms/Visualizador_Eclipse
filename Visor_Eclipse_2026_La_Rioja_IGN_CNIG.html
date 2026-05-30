@@ -55,44 +55,7 @@
   white-space: nowrap;
 }
 
-/* Icono información */
-.info-ign {
-  width: 32px;
-  height: 32px;
-  background-color: #0065a3; /* azul IGN */
-  color: #fff;
-  border-radius: 50%;
-  text-align: center;
-  line-height: 32px;
-  font-weight: bold;
-  text-decoration: none;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-/* ===== MÓVIL ===== 
-@media (max-width: 768px) {
-
-  #cabecera-ign {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 6px;
-  }
-
-  .titulo-ign {
-    font-size: 13px;
-    white-space: normal;
-    line-height: 1.2;
-  }
-
-  .info-ign {
-    width: 36px;
-    height: 36px;
-    line-height: 36px;
-    font-size: 16px;
-  }
-}
-*/
-  </style>
+</style>
 </head>
 
 <body>
@@ -106,13 +69,6 @@
   <div class="titulo-ign">
     Servicio regional del IGN en La Rioja y Navarra
   </div>
-
-  <a class="info-ign"
-     href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf"
-     target="_blank"
-     aria-label="Información">
-    i
-  </a>
 
 </div>
 
@@ -143,7 +99,7 @@ const mapa = IDEE.map({
 });
 
 /************************************************
- * 2. COG DIRECTO SOBRE EL MAPA
+ COG DIRECTO SOBRE EL MAPA
  ************************************************/
 const capaCOG = new IDEE.layer.GeoTIFF(
   {    
@@ -159,7 +115,9 @@ const capaCOG = new IDEE.layer.GeoTIFF(
 
 // Por delante en index 10, index 0 (al fondo)
 capaCOG.setZIndex(10);
-capaCOG.setOpacity(0.7)
+
+capaCOG.setOpacity(1)
+
 mapa.addLayers(capaCOG);
 /************************************************
  GEOJSON CCAA
@@ -188,11 +146,9 @@ const CCAA = new ol.layer.Vector({
   label: 'WGS84',
   precision: 4,
 });
+
 mapa.addPlugin(mousesrs);
 
-
-
 </script>
-
 </body>
 </html>
