@@ -154,6 +154,14 @@ const capaCOG = new IDEE.layer.GeoTIFF(
   },
   {
     visibility: true
+    style: {
+      color: [
+        'case',
+        ['==', ['band', 1], 0],
+        'rgba(0,0,0,0)',   // transparente (nodata o 0)
+        'rgba(0,0,0,1)'    // negro
+      ]
+    }
   }
 );
 
