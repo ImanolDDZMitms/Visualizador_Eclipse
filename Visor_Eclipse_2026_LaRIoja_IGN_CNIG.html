@@ -13,8 +13,9 @@
   <link rel="stylesheet"
         href="https://componentes.idee.es/api-idee/assets/css/apiidee.ol.min.css">
 
-  <!-- ===== MOUSE SRS ===== -->
-  <link href="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs-1.0.0.ol.min.css" rel="stylesheet" />
+  <!-- ===== MOUSER SRS ===== -->
+  <link href="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs-1.0.0.ol.min.css" rel="stylesheet"/>
+
   <style>
     html, body {
       margin: 0;
@@ -69,7 +70,7 @@
   box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-/* ===== MÓVIL ===== */
+/* ===== MÓVIL ===== 
 @media (max-width: 768px) {
 
   #cabecera-ign {
@@ -91,7 +92,7 @@
     font-size: 16px;
   }
 }
-
+*/
   </style>
 </head>
 
@@ -104,7 +105,7 @@
 <div id="cabecera-ign">
 
   <div class="titulo-ign">
-    Servicio regional del IGN en La Rioja
+    Servicio regional del IGN en La Rioja y Navarra
   </div>
 
   <a class="info-ign"
@@ -128,7 +129,7 @@
 
 <script>
 /************************************************
- * 1. MAPA BASE
+ MAPA BASE
  ************************************************/
 const mapa = IDEE.map({
   container: 'mapa',
@@ -146,8 +147,7 @@ const mapa = IDEE.map({
  * 2. COG DIRECTO SOBRE EL MAPA
  ************************************************/
 const capaCOG = new IDEE.layer.GeoTIFF(
-  {
-    
+  {    
     url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/VIS_ECLIPSE_LA_RIOJA_FINAL_COG.tif',
 
     name: 'Visibilidad La Rioja',
@@ -163,9 +163,8 @@ capaCOG.setZIndex(10);
 capaCOG.setOpacity(0.7)
 mapa.addLayers(capaCOG);
 /************************************************
- * 3. GEOJSON CCAA
- ************************************************/
-
+ GEOJSON CCAA
+ 
 const CCAA = new ol.layer.Vector({
           source: new ol.source.Vector({
             format: new ol.format.GeoJSON(),
@@ -177,38 +176,20 @@ const CCAA = new ol.layer.Vector({
         const GenericVector = new IDEE.layer.GenericVector({}, {}, CCAA)
 
         mapa.addLayers(GenericVector)
-
-
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+************************************************/
 
 /************************************************
- * 3. COORDENADAS MOUSERSRS
+ COORDENADAS MOUSERSRS
  ************************************************/
 
- const mp = new IDEE.plugin.MouseSRS({
+ const mousesrs = new IDEE.plugin.MouseSRS({
   position: 'BL',
   tooltip: 'Muestra coordenadas',
   srs: 'EPSG:4326',
   label: 'WGS84',
   precision: 4,
 });
-mapa.addPlugin(mp);
+mapa.addPlugin(mousesrs);
 
 
 
