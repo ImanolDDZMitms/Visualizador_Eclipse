@@ -125,15 +125,6 @@ mapa.addLayers(capaCOG);
 /************************************************
  GEOJSON CCAA
 
-const CCAA = new ol.layer.Vector({
-          source: new ol.source.Vector({
-            format: new ol.format.GeoJSON(),
-            url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA RIOJA(web mercator).geojson',
-            strategy: ol.loadingstrategy.bbox,
-          }),
-        });
-
-mapa.addLayers(CCAA);
  ************************************************/
 
 var CCAA = new IDEE.layer.GeoJSON({
@@ -142,10 +133,7 @@ var CCAA = new IDEE.layer.GeoJSON({
     extract:false
 });
 
-
-
-// Configuracion de estilos
-
+// Configuracion de estilo CCAA
 
 let estilo_CCAA = new IDEE.style.Generic({
   polygon: {
@@ -160,14 +148,10 @@ let estilo_CCAA = new IDEE.style.Generic({
   }
 });
 
-  // Asignamos el estilo a la capa
+// Asignar el estilo y al mapa
           
 CCAA.setStyle(estilo_CCAA);
 mapa.addLayers(CCAA);
-
-
-
-
 
 
 /************************************************
@@ -177,8 +161,8 @@ mapa.addLayers(CCAA);
  const mousesrs = new IDEE.plugin.MouseSRS({
   position: 'BL',
   tooltip: 'Muestra coordenadas',
-  srs: 'EPSG:4326',
-  label: 'WGS84',
+  srs: 'EPSG:3857',
+  label: 'Web Mercator',
   precision: 4,
 });
 
