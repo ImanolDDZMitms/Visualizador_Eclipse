@@ -119,9 +119,12 @@ capaCOG.setZIndex(10);
 capaCOG.setOpacity(1)
 
 mapa.addLayers(capaCOG);
+
+
+
 /************************************************
  GEOJSON CCAA
- 
+ ************************************************/
 const CCAA = new ol.layer.Vector({
           source: new ol.source.Vector({
             format: new ol.format.GeoJSON(),
@@ -130,10 +133,8 @@ const CCAA = new ol.layer.Vector({
           }),
         });
 
-        const GenericVector = new IDEE.layer.GenericVector({}, {}, CCAA)
+        mapa.addLayers(CCAA);
 
-        mapa.addLayers(GenericVector)
-************************************************/
 
 /************************************************
  COORDENADAS MOUSERSRS
