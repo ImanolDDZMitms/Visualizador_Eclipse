@@ -145,22 +145,24 @@ var CCAA = new IDEE.layer.GeoJSON({
 
 
 // Configuracion de estilos
-let estilo_CCAA = new IDEE.style.Polygon({
-  fill: {
-    color: 'green',
-    opacity: 0.7,
-  },
-  stroke: {
-    color: '#FF0000',
-    width: 0.5
+
+let estilo_CCAA = new IDEE.style.Generic({  polygon    },  
+  polygon: {
+    stroke: {
+      color: '#FF0000',
+      width: 1
+    }
   }
-});	
-        
+});
+    fill: {
+      color: 'green',
+      opacity: 0.3
+    }
         
   // Asignamos el estilo a la capa
           
-  CCAA.setStyle(estilo_CCAA);
-
+CCAA.setStyle(estilo_CCAA);
+mapa.addLayers(CCAA);
 
 
 
