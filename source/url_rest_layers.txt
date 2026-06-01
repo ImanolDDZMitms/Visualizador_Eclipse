@@ -1,0 +1,1 @@
+https://visualizadores.ign.es/eclipses/2026?layers=https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LAYERS_LA_RIOJA.json 
