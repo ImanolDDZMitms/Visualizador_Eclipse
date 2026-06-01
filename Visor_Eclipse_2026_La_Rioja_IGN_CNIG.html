@@ -120,9 +120,10 @@ capaCOG.setOpacity(1)
 
 mapa.addLayers(capaCOG);
 
+
 /************************************************
  zxy DIRECTO SOBRE EL MAPA
- ************************************************/
+ 
 
 const capaZXY = new IDEE.layer.TMS(
   {
@@ -137,6 +138,9 @@ const capaZXY = new IDEE.layer.TMS(
 
 capaZXY.setZIndex(8);
 mapa.addLayers(capaZXY);
+************************************************/
+
+
 
 /************************************************
  GEOJSON CCAA
@@ -183,6 +187,27 @@ mapa.addLayers(CCAA);
 });
 
 mapa.addPlugin(mousesrs);
+
+/************************************************
+ Layerswitcher
+ ************************************************/
+
+const selectorcapas = new IDEE.plugin.Layerswitcher(
+  { 
+  collapsed: !0, 
+  position: "TR", 
+  collapsible: !0, 
+  isDraggable: !1, 
+  modeSelectLayers: "eyes", 
+  tools: ["transparency", "legend", "zoom", "information", "style", "delete"], 
+  isMoveLayers: !0, 
+  https: !0, 
+  http: !0, 
+  showCatalog: !1 
+});
+mapa.addPlugin(selectorcapas);
+
+
 
 </script>
 </body>
