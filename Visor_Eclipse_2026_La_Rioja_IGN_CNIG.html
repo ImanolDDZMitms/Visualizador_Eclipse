@@ -120,7 +120,23 @@ capaCOG.setOpacity(1)
 
 mapa.addLayers(capaCOG);
 
+/************************************************
+ zxy DIRECTO SOBRE EL MAPA
+ ************************************************/
 
+const capaZXY = new IDEE.layer.TMS(
+  {
+  url: 'https//xyz-mdt.idee.es/1.0.0/sombras/{z}/{x}/{y}.png',
+  name: 'Sombra ZXY La Rioja',
+  legend: 'Sombra ZXY La Rioja',
+  visibility:!0,
+  }
+);
+
+// Por delante en index 10, index 0 (al fondo)
+
+capaZXY.setZIndex(8);
+mapa.addLayers(capaZXY);
 
 /************************************************
  GEOJSON CCAA
