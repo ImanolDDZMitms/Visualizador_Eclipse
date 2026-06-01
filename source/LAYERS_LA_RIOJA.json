@@ -12,10 +12,10 @@
             "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif", 
 
 
-            "name": "AEMET", 
+            "name": "SOMBRA ECLIPSE 2026 EN LA RIOJA", 
 
 
-            "legend": "El tiempo AEMET", 
+            "legend": "SOMBRA ECLIPSE 2026 EN LA RIOJA", 
 
 
             "extract": false 
@@ -25,7 +25,7 @@
 
         { 
 
-            "opacity": 0.3 
+            "opacity": 1 
         } 
             ] 
             } 
