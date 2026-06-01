@@ -12,9 +12,11 @@
   <!-- ===== CSS API‑IDEE ===== -->
   <link  href="https://componentes.idee.es/api-idee/assets/css/apiidee.ol.min.css" rel="stylesheet"/>
 
-  <!-- ===== MOUSER SRS ===== -->
+  <!-- ===== MOUSERSRS ===== -->
   <link href="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs-1.0.0.ol.min.css" rel="stylesheet"/>
-
+  
+  <!-- ===== LAYERSWITCHER ===== -->
+  <link href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
   <style>
     html, body {
       margin: 0;
@@ -79,8 +81,11 @@
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
 
 
-<!-- ===== PLUGIN MOUSERSRS ===== -->
+<!-- ===== MOUSERSRS ===== -->
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs.ol.min.js"></script>
+
+<!-- ===== LAYERSWITCHER ===== -->
+<script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
 <script>
 /************************************************
@@ -181,8 +186,8 @@ mapa.addLayers(CCAA);
  const mousesrs = new IDEE.plugin.MouseSRS({
   position: 'BL',
   tooltip: 'Muestra coordenadas',
-  srs: 'EPSG:3857',
-  label: 'Web Mercator',
+  srs: 'EPSG:4326',
+  label: 'WGS84 (lat, lon)',
   precision: 4,
 });
 
