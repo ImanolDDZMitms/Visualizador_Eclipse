@@ -3,7 +3,7 @@
     "GeoTIFF": 
     
     { 
-        "SERVICIO REGIONAL EN LA RIOJA Y NAVARRA (ECLIPSE 2026)": 
+        "SHADE_2026_LA_RIOJA_ECLIPSE": 
         [ 
         { 
             "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif", 
