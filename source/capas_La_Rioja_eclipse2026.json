@@ -12,5 +12,18 @@
 		    "opacity": 0.6
 	    }
     ]
-  }
+  },
+  "WFS": {
+  "unidades administrativas": [
+    {
+      "url": "https://idem.comunidad.madrid/geoidem/UnidadesAdministrativas/ows?",
+      "name": "IDEM_CM_UNID_ADMIN",
+      "namespace": "UnidadesAdministrativas",
+      "version": "1.1.0",
+      "legend": "Unidades Administrativas",
+      "extract": false
+    },
+    {
+      "displayInLayerSwitcher": true
+    }
 }
