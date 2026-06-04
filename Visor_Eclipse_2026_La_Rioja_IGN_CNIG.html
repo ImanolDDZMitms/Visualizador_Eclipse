@@ -41,7 +41,7 @@
       z-index: 1000;
       display: flex;
       justify-content: space-between; 
-      align-items: center;
+      align-items: flex-start; /* Alineado arriba para la columna izquierda */
       padding: 0 15px;
       box-sizing: border-box;
       pointer-events: none;
@@ -51,6 +51,14 @@
       pointer-events: auto;
     }
 
+    /* Contenedor Izquierdo: Logo Delegación + Botón PDF */
+    .columna-izquierda {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
     /* Contenedor central para Logo 2 y Texto */
     .contenedor-central {
       display: flex;
@@ -58,16 +66,17 @@
       align-items: center;
       gap: 5px;
       flex-grow: 1;
+      margin-top: 5px;
     }
 
     .logo1 {
-      height: 50px;
+      height: 95px; /* Logo Delegación más grande */
       width: auto;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
 
     .logo2 {
-      height: 55px; /* 5px más grande que el original */
+      height: 55px; 
       width: auto;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
@@ -84,20 +93,16 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Espaciador invisible a la derecha para mantener el centro perfecto */
+    /* Espaciador para equilibrar el centro */
     .spacer-derecha {
-      width: 50px; 
+      width: 100px; 
     }
 
-    /* ===== BOTÓN PDF INFO (MÁS PEQUEÑO E INVERTIDO) ===== */
+    /* ===== BOTÓN PDF INFO (DEBAJO DEL LOGO 1) ===== */
     .btn-info-pdf {
-      position: absolute;
-      bottom: 110px;
-      right: 20px;
-      z-index: 1001;
       background-color: #007bff;
       border-radius: 50%;
-      width: 42px; /* Reducido otros 2px de radio (4px de diámetro) */
+      width: 42px; 
       height: 42px;
       display: flex;
       align-items: center;
@@ -114,7 +119,7 @@
     }
 
     .btn-info-pdf svg {
-      width: 24px; /* Proporcional al nuevo tamaño */
+      width: 24px;
       height: 24px;
       fill: #ffffff;
     }
@@ -126,13 +131,17 @@
         padding: 4px 8px;
       }
       .logo1 {
-        height: 35px;
+        height: 60px; /* Reducción proporcional en móvil */
       }
       .logo2 {
         height: 40px;
       }
       .spacer-derecha {
-        width: 35px;
+        width: 60px;
+      }
+      .btn-info-pdf {
+        width: 36px;
+        height: 36px;
       }
     }
 
@@ -145,30 +154,31 @@
 
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <div id="cabecera-ign">
-  <!-- Logo DELEGACIÓN (Izquierda) -->
-  <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Logo 1" class="logo1">
+  
+  <!-- Columna Izquierda: Logo Delegación y Botón PDF debajo -->
+  <div class="columna-izquierda">
+    <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Logo Delegación" class="logo1">
+    <a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/informacion.pdf" target="_blank" class="btn-info-pdf" title="Información PDF">
+      <svg viewBox="0 0 24 24">
+        <path d="M11,9H13V7H11V9M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+      </svg>
+    </a>
+  </div>
 
   <!-- Centro: Logo IGN ENCIMA del Texto -->
   <div class="contenedor-central">
-    <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_IGN.png" alt="Logo 2" class="logo2">
+    <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_IGN.png" alt="Logo IGN" class="logo2">
     <div class="titulo-ign">
       Servicio regional del IGN en La Rioja y Navarra
     </div>
   </div>
 
-  <!-- Espaciador para equilibrar el Logo 1 y que el centro sea real -->
+  <!-- Espaciador para equilibrar la vista -->
   <div class="spacer-derecha"></div>
 </div>
 
-<!-- ===== BOTÓN DE INFORMACIÓN PDF ===== -->
-<a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/informacion.pdf" target="_blank" class="btn-info-pdf">
-  <svg viewBox="0 0 24 24">
-    <path d="M11,9H13V7H11V9M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
-  </svg>
-</a>
 
-
-<!-- ===== JS API‑IDEE ===== -->
+<!-- ===== JS API‑IDEE (SIN CAMBIOS) ===== -->
 <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
@@ -186,7 +196,7 @@ const mapa = IDEE.map({
 });
 
 const capaCOG = new IDEE.layer.GeoTIFF({    
-    url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
+    url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rio_Sombra_COG_WM.tif',
     name: 'Sombra La Rioja',
     legend: 'Sombra La Rioja ECLIPSE 2026'
   }, { visibility: true, opacity: 1 });
