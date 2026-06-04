@@ -14,57 +14,59 @@
   <style>
     /* Estructura Base */
     html, body {
-      margin: 0; padding: 0; height: 100%; width: 100%;
-      display: flex; flex-direction: column;
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      flex-direction: column; /* Encabezado arriba, mapa abajo */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       overflow: hidden;
       background-color: #ffffff;
     }
 
-    /* ===== ENCABEZADO SUPERIOR ===== */
+    /* ===== ENCABEZADO SUPERIOR (FUERA DEL MAPA) ===== */
     #header-institucional {
-      flex: 0 0 auto;
+      flex: 0 0 auto; /* El encabezado solo ocupa su espacio necesario */
       background-color: #f0f7ff; /* Azul claro suave */
-      border-bottom: 6px solid #ffffff; /* Borde blanco */
+      border-bottom: 6px solid #ffffff; /* Borde blanco grueso pedido */
       display: flex;
       justify-content: space-between;
       align-items: center;
       padding: 10px 30px;
       box-shadow: 0 3px 6px rgba(0,0,0,0.1);
-      z-index: 1000;
-      transition: all 0.3s ease-in-out; /* Animación suave al aparecer/desaparecer */
-      overflow: hidden;
+      z-index: 10; /* Suficiente para estar sobre el mapa pero sin romper plugins */
     }
 
-    /* Clase para esconder el encabezado */
-    .header-oculto {
-      height: 0 !important;
-      padding: 0 !important;
-      border: 0 !important;
-      opacity: 0;
-      pointer-events: none;
+    .header-col {
+      display: flex;
+      align-items: center;
     }
 
-    .header-col { display: flex; align-items: center; }
     .header-left { flex: 1; justify-content: flex-start; }
-    .header-center { flex: 2; flex-direction: column; gap: 8px; text-align: center; }
+    .header-center { flex: 2; flex-direction: column; gap: 8px; }
     .header-right { flex: 1; justify-content: flex-end; }
 
+    /* Imagenes Proporcionales */
     .logo-header {
-      height: clamp(50px, 8vh, 90px);
+      height: clamp(50px, 8vh, 90px); /* Escala proporcionalmente */
       width: auto;
       object-fit: contain;
     }
 
+    /* Texto con Escala Proporcional */
     .titulo-principal {
-      font-size: clamp(14px, 2.5vw, 24px); 
+      /* clamp(mínimo, preferido, máximo) */
+      font-size: clamp(13px, 2.5vw, 24px); 
       font-weight: 800;
       color: #003366;
       margin: 0;
+      text-align: center;
       line-height: 1.1;
       text-transform: uppercase;
     }
 
+    /* Botón PDF */
     .btn-pdf-header {
       background-color: #d32f2f;
       color: white !important;
@@ -76,34 +78,61 @@
       display: flex;
       align-items: center;
       gap: 8px;
+      transition: all 0.3s ease;
       box-shadow: 0 2px 4px rgba(0,0,0,0.2);
     }
 
-    .btn-pdf-header img { height: 16px; filter: brightness(0) invert(1); }
+    .btn-pdf-header:hover {
+      background-color: #b71c1c;
+      transform: translateY(-1px);
+    }
+
+    .btn-pdf-header img {
+      height: 16px;
+      filter: brightness(0) invert(1);
+    }
 
     /* ===== CONTENEDOR DEL MAPA ===== */
     #mapa {
-      flex: 1 1 auto;
+      flex: 1 1 auto; /* Toma todo el espacio restante */
       width: 100%;
       position: relative;
     }
 
-    /* AJUSTES MÓVIL VERTICAL */
-    @media (max-width: 600px) {
-      #header-institucional { padding: 8px 10px; }
-      .logo-header { height: 50px; }
-      .header-center { flex: 3; }
+    /* ===== AJUSTES ESPECÍFICOS PARA MÓVIL VERTICAL (Portrait) ===== */
+    @media (max-width: 600px) and (orientation: portrait) {
+      #header-institucional {
+        padding: 8px 10px;
+        min-height: 90px;
+      }
+      .header-center {
+        flex: 3; /* Más espacio al texto en móvil */
+      }
+      .logo-header {
+        height: 45px; /* Logos más pequeños para que no "empujen" el mapa hacia abajo */
+      }
+      .titulo-principal {
+        letter-spacing: -0.5px;
+      }
+    }
+
+    /* Ajuste para evitar que el LayerSwitcher se pegue al borde superior en exceso */
+    .ol-overlaycontainer-stopevent .idee-layerswitcher {
+        top: 15px !important; 
     }
   </style>
 </head>
 
 <body>
 
+  <!-- ENCABEZADO INSTITUCIONAL -->
   <header id="header-institucional">
+    <!-- Top Left -->
     <div class="header-col header-left">
       <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Delegación" class="logo-header">
     </div>
 
+    <!-- Center -->
     <div class="header-col header-center">
       <h1 class="titulo-principal">Servicio regional del IGN en La Rioja y Navarra</h1>
       <a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-pdf-header">
@@ -112,14 +141,16 @@
       </a>
     </div>
 
+    <!-- Top Right -->
     <div class="header-col header-right">
       <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_IGN.png" alt="IGN" class="logo-header">
     </div>
   </header>
 
+  <!-- CONTENEDOR DEL MAPA -->
   <div id="mapa" class="m-container"></div>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS API‑IDEE -->
   <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
   <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
   <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
@@ -131,7 +162,7 @@
       container: 'mapa',
       zoom: 9.5,
       minZoom: 8,
-      center: [-273000, 5220000], 
+      center: [-273000, 5210000], 
       controls: ['scaleline', 'location', 'rotate']
     });
 
@@ -152,61 +183,28 @@
 
     const ORTO_MA = new IDEE.layer.WMS({
       url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
-      name: 'Ortofoto PNOA',
+      name: 'OI.OrthoimageCoverage',
+      legend: 'Ortofoto PNOA',
       visibility: true
     });
 
     mapa.addLayers([ORTO_MA, capaCOG, CCAA]);
 
-    mapa.addPlugin(new IDEE.plugin.MouseSRS({ position: 'BL', srs: 'EPSG:4326', label: 'Lat, Lon' }));
+    // Plugins
+    mapa.addPlugin(new IDEE.plugin.MouseSRS({
+      position: 'BL',
+      srs: 'EPSG:4326',
+      label: 'Lat, Lon',
+      precision: 4,
+    }));
 
-    // Configuración LayerSwitcher
-    const sw = new IDEE.plugin.Layerswitcher({ 
+    mapa.addPlugin(new IDEE.plugin.Layerswitcher({ 
       collapsed: true, 
       position: "TR", 
       collapsible: true, 
+      modeSelectLayers: "eyes", 
       showCatalog: false 
-    });
-    mapa.addPlugin(sw);
-
-    // ================================================================
-    // LÓGICA PARA OCULTAR CABECERA EN MÓVIL CUANDO SE ABRE EL SELECTOR
-    // ================================================================
-    
-    // Función que verifica si debe ocultar o mostrar
-    const manejarCabecera = () => {
-      const header = document.getElementById('header-institucional');
-      const lsElement = document.querySelector('.idee-layerswitcher');
-      
-      if (!lsElement) return;
-
-      // Detectamos si el selector está abierto (no tiene la clase 'idee-collapsed')
-      const estaAbierto = !lsElement.classList.contains('idee-collapsed');
-      const esMovil = window.innerWidth <= 600;
-
-      if (esMovil && estaAbierto) {
-        header.classList.add('header-oculto');
-      } else {
-        header.classList.remove('header-oculto');
-      }
-    };
-
-    // Observador que mira cambios en el LayerSwitcher
-    const observer = new MutationObserver(() => {
-      manejarCabecera();
-    });
-
-    // Esperamos un segundo a que el plugin se cargue en el DOM para empezar a observar
-    setTimeout(() => {
-      const target = document.querySelector('.idee-layerswitcher');
-      if (target) {
-        observer.observe(target, { attributes: true, attributeFilter: ['class'] });
-      }
-    }, 1000);
-
-    // También ejecutamos al cambiar el tamaño de la ventana
-    window.addEventListener('resize', manejarCabecera);
-
+    }));
   </script>
 </body>
 </html>
