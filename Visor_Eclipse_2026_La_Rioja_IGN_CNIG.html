@@ -41,7 +41,7 @@
       z-index: 1000;
       display: flex;
       justify-content: space-between; 
-      align-items: flex-start; /* Alineado arriba para la columna izquierda */
+      align-items: flex-start; 
       padding: 0 15px;
       box-sizing: border-box;
       pointer-events: none;
@@ -70,7 +70,7 @@
     }
 
     .logo1 {
-      height: 95px; /* Logo Delegación más grande */
+      height: 95px; /* Logo Delegación Grande */
       width: auto;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
@@ -93,35 +93,32 @@
       font-family: Arial, sans-serif;
     }
 
-    /* Espaciador para equilibrar el centro */
     .spacer-derecha {
       width: 100px; 
     }
 
-    /* ===== BOTÓN PDF INFO (DEBAJO DEL LOGO 1) ===== */
+    /* ===== BOTÓN PDF INFO CON TU IMAGEN ===== */
     .btn-info-pdf {
-      background-color: #007bff;
-      border-radius: 50%;
-      width: 42px; 
+      display: block;
+      width: 42px; /* Tamaño solicitado */
       height: 42px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       cursor: pointer;
       transition: transform 0.2s;
-      border: 2px solid #ffffff;
       text-decoration: none;
+      border-radius: 50%; /* Asegura que el contenedor sea circular */
+      overflow: hidden; /* Recorta la imagen sobrante */
+    }
+
+    .btn-info-pdf img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover; /* Ajusta la imagen al círculo sin deformarla */
+      display: block;
     }
 
     .btn-info-pdf:hover {
       transform: scale(1.1);
-    }
-
-    .btn-info-pdf svg {
-      width: 24px;
-      height: 24px;
-      fill: #ffffff;
     }
 
     /* ===== ADAPTACIÓN MÓVIL ===== */
@@ -131,7 +128,7 @@
         padding: 4px 8px;
       }
       .logo1 {
-        height: 60px; /* Reducción proporcional en móvil */
+        height: 60px;
       }
       .logo2 {
         height: 40px;
@@ -155,13 +152,13 @@
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <div id="cabecera-ign">
   
-  <!-- Columna Izquierda: Logo Delegación y Botón PDF "Visivilidad_Sol_ECLIPSE_2026" debajo -->
+  <!-- Columna Izquierda: Logo Delegación y Botón con tu imagen debajo -->
   <div class="columna-izquierda">
     <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Logo Delegación" class="logo1">
+    
     <a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Información PDF">
-      <svg viewBox="0 0 24 24">
-        <path d="M11,9H13V7H11V9M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
-      </svg>
+      <!-- Cambia 'icono_info.png' por el nombre con el que guardes la imagen que me has pasado -->
+      <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/INFO.png" alt="Info">
     </a>
   </div>
 
@@ -173,7 +170,6 @@
     </div>
   </div>
 
-  <!-- Espaciador para equilibrar la vista -->
   <div class="spacer-derecha"></div>
 </div>
 
