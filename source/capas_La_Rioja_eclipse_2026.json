@@ -1,14 +1,15 @@
 {
-    "GeoTIFF": {
-	"SOMBRA": [
+ "GeoTIFF": {
+    "SOMBRA": [
       {
         "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
         "name": "SOMBRA",
         "legend": "SOMBRA_ECLIPSE_2026_EN_LA_RIOJA",
         "extract": false
       },
-	  {},
       {
+        "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
+        "name": "SOMBRA_OPACITY",
 		"opacity": 0.6
 	  }
     ]
