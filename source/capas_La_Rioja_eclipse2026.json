@@ -16,7 +16,7 @@
   "GeoTIFF": {
 	"aemet": [
       {
-        "url": "https://www.ign.es/resources/cnig/nubosidadCEPPM.tif",
+        "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
         "name": "AEMET",
         "legend": "El tiempo AEMET",
         "extract": false
