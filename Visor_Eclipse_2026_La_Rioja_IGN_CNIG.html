@@ -24,40 +24,92 @@
       height: 100%;
       overflow: hidden;
     }
-/* Asegura que el contenedor ocupe toda la pantalla */
-#mapa {
-  width: 100%;
-  height: 100vh; /* 100% del alto de la ventana visual */
-  position: absolute;
-  top: 0;
-  left: 0;
-}
+    /* Asegura que el contenedor ocupe toda la pantalla */
+    #mapa {
+      width: 100%;
+      height: 100vh;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
     /* ===== CABECERA IGN ===== */
-#cabecera-ign {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  z-index: 1000;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-family: Arial, sans-serif;
-  max-width: calc(100vw - 20px);
-}
+    #cabecera-ign {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: Arial, sans-serif;
+      max-width: calc(100vw - 20px);
+    }
 
-/* Texto principal */
-.titulo-ign {
-  background-color: rgba(255, 255, 255, 0.95);
-  padding: 8px 12px;
-  border-radius: 4px;
-  font-size: 14px;
-  font-weight: bold;
-  color: #333;
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-  white-space: nowrap;
-}
+    .titulo-ign {
+      background-color: rgba(255, 255, 255, 0.95);
+      padding: 8px 12px;
+      border-radius: 4px;
+      font-size: 14px;
+      font-weight: bold;
+      color: #333;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+      white-space: nowrap;
+    }
 
-</style>
+    /* ===== BOTÓN PDF INFO ===== */
+    .btn-info-pdf {
+      position: absolute;
+      bottom: 110px; /* Ajustado para que no tape la escala o el logo del IGN */
+      right: 20px;
+      z-index: 1001;
+      background-color: #ffffff;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s;
+      border: 2px solid #007bff;
+      text-decoration: none;
+    }
+
+    .btn-info-pdf:hover {
+      transform: scale(1.1);
+      background-color: #f0f7ff;
+    }
+
+    .btn-info-pdf svg {
+      width: 30px;
+      height: 30px;
+      fill: #007bff;
+    }
+
+    /* Tooltip simple al pasar el ratón */
+    .btn-info-pdf::after {
+      content: "Más información (PDF)";
+      position: absolute;
+      right: 60px;
+      background: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s;
+      font-family: Arial, sans-serif;
+    }
+
+    .btn-info-pdf:hover::after {
+      opacity: 1;
+    }
+
+  </style>
 </head>
 
 <body>
@@ -67,24 +119,27 @@
 
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <div id="cabecera-ign">
-
   <div class="titulo-ign">
     Servicio regional del IGN en La Rioja y Navarra
   </div>
-
 </div>
 
+<!-- ===== BOTÓN DE INFORMACIÓN PDF ===== -->
+<!-- Sustituye 'tu_archivo_informacion.pdf' por la URL real de tu PDF -->
+<a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/informacion.pdf" target="_blank" class="btn-info-pdf" title="Ver guía del Eclipse">
+  <svg viewBox="0 0 24 24">
+    <path d="M11,9H13V7H11V9M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
+  </svg>
+</a>
 
-<!-- ===== JS API‑IDEE (ORDEN CORRECTO) ===== -->
+
+<!-- ===== JS API‑IDEE ===== -->
 <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
 
-
-<!-- ===== MOUSERSRS ===== -->
+<!-- ===== PLUGINS ===== -->
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs.ol.min.js"></script>
-
-<!-- ===== LAYERSWITCHER ===== -->
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
 <script>
@@ -109,50 +164,20 @@ const mapa = IDEE.map({
 const capaCOG = new IDEE.layer.GeoTIFF(
   {    
     url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
-
     name: 'Sombra La Rioja',
     legend: 'Sombra La Rioja ECLIPSE 2026'
   },
   {
     visibility: true,
-    opacity: 0.6
+    opacity: 1
   }
 );
-
-// Por delante en index 10, index 0 (al fondo)
 capaCOG.setZIndex(10);
-
-capaCOG.setOpacity(1)
-
 mapa.addLayers(capaCOG);
-
-
-/************************************************
- zxy DIRECTO SOBRE EL MAPA
- 
-
-const capaZXY = new IDEE.layer.TMS(
-  {
-  url: 'https//xyz-mdt.idee.es/1.0.0/sombras/{z}/{x}/{y}.png',
-  name: 'Sombra ZXY La Rioja',
-  legend: 'Sombra ZXY La Rioja',
-  visibility:!0,
-  }
-);
-
-// Por delante en index 10, index 0 (al fondo)
-
-capaZXY.setZIndex(8);
-mapa.addLayers(capaZXY);
-************************************************/
-
-
 
 /************************************************
  GEOJSON CCAA
-
  ************************************************/
-
 var CCAA = new IDEE.layer.GeoJSON(
   {
     name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
@@ -161,47 +186,32 @@ var CCAA = new IDEE.layer.GeoJSON(
     visibility: true
 });
 
-// Configuracion de estilo CCAA
-
 let estilo_CCAA = new IDEE.style.Generic({
   polygon: {
-    fill: {
-      color: 'green',
-      opacity: 0
-    },
-    stroke: {
-      color: '#FF0000',
-      width: 3
-    }
+    fill: { color: 'green', opacity: 0 },
+    stroke: { color: '#FF0000', width: 3 }
   }
 });
-
-// Asignar el estilo y al mapa
           
 CCAA.setStyle(estilo_CCAA);
 mapa.addLayers(CCAA);
 
-
 /************************************************
  COORDENADAS MOUSERSRS
  ************************************************/
-
- const mousesrs = new IDEE.plugin.MouseSRS({
+const mousesrs = new IDEE.plugin.MouseSRS({
   position: 'BL',
   tooltip: 'Muestra coordenadas',
   srs: 'EPSG:4326',
   label: 'WGS84 (lat, lon)',
   precision: 4,
 });
-
 mapa.addPlugin(mousesrs);
 
 /************************************************
  Layerswitcher
  ************************************************/
-
-const selectorcapas = new IDEE.plugin.Layerswitcher(
-  { 
+const selectorcapas = new IDEE.plugin.Layerswitcher({ 
   collapsed: !0, 
   position: "TR", 
   collapsible: !0, 
@@ -214,8 +224,6 @@ const selectorcapas = new IDEE.plugin.Layerswitcher(
   showCatalog: !1 
 });
 mapa.addPlugin(selectorcapas);
-
-
 
 </script>
 </body>
