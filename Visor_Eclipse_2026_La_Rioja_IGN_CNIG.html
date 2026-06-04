@@ -12,97 +12,113 @@
   <link href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
 
   <style>
-    /* 1. ESTRUCTURA DE MARCO FUERA DEL MAPA */
+    /* Reset y estructura base */
     html, body {
       margin: 0;
       padding: 0;
-      height: 100vh; /* Altura total de la ventana */
-      width: 100vw;
+      height: 100%;
       display: flex;
-      flex-direction: column; /* Marco arriba, Mapa abajo */
+      flex-direction: column; /* Organiza encabezado arriba y mapa abajo */
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden; /* Prohibido el scroll en toda la web */
-      background-color: #f8f9fa; /* Color de fondo del marco */
+      overflow: hidden;
     }
 
-    /* 2. EL ENCABEZADO (MARCO INDEPENDIENTE) */
+    /* ===== ENCABEZADO FUERA DEL MAPA ===== */
     #header-institucional {
-      flex: 0 0 auto; /* No se estira ni se encoge */
       background-color: #f0f7ff; /* Azul claro suave */
-      border-bottom: 6px solid #ffffff; /* Borde blanco grueso */
+      border-bottom: 4px solid #ffffff; /* Borde blanco grueso */
       display: flex;
-      justify-content: space-between;
+      justify-content: space-between; /* Izquierda, Centro, Derecha */
       align-items: center;
-      padding: 10px 30px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      position: relative;
-      z-index: 9999; /* Por encima de TODO el mapa */
-      transition: transform 0.3s ease, opacity 0.3s ease; /* Para el auto-ocultado en móvil */
+      padding: 10px 20px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      z-index: 1001;
     }
 
-    /* Columnas del marco */
-    .header-col { display: flex; align-items: center; }
-    .header-left { flex: 1; justify-content: flex-start; }
-    .header-center { flex: 2; flex-direction: column; gap: 8px; text-align: center; }
-    .header-right { flex: 1; justify-content: flex-end; }
+    /* Logo Izquierdo (Delegación) */
+    .header-left {
+      flex: 1;
+      display: flex;
+      justify-content: flex-start;
+    }
 
-    /* Logos y Texto Escalables */
+    /* Bloque Central (Texto y Botón) */
+    .header-center {
+      flex: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      text-align: center;
+    }
+
+    /* Logo Derecho (IGN) */
+    .header-right {
+      flex: 1;
+      display: flex;
+      justify-content: flex-end;
+    }
+
     .logo-header {
-      height: clamp(50px, 8vh, 85px);
+      height: 80px; /* Tamaño ajustable */
       width: auto;
       object-fit: contain;
     }
 
     .titulo-principal {
-      font-size: clamp(14px, 2.4vw, 26px); /* Letras grandes en desktop */
-      font-weight: 800;
+      font-size: 1.2rem;
+      font-weight: bold;
       color: #003366;
       margin: 0;
       text-transform: uppercase;
-      line-height: 1.1;
+      letter-spacing: 0.5px;
     }
 
+    /* Botón PDF integrado en el encabezado */
     .btn-pdf-header {
       background-color: #d32f2f;
-      color: white !important;
+      color: white;
       text-decoration: none;
-      padding: 8px 16px;
-      border-radius: 4px;
-      font-size: clamp(11px, 1.2vw, 14px);
+      padding: 6px 15px;
+      border-radius: 20px;
+      font-size: 12px;
       font-weight: bold;
       display: flex;
       align-items: center;
       gap: 8px;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+      transition: background 0.3s;
     }
 
-    .btn-pdf-header img { height: 16px; filter: brightness(0) invert(1); }
+    .btn-pdf-header:hover {
+      background-color: #b71c1c;
+    }
 
-    /* 3. CONTENEDOR DEL MAPA (DENTRO DEL MARCO) */
+    .btn-pdf-header img {
+      height: 16px;
+      filter: brightness(0) invert(1);
+    }
+
+    /* ===== CONTENEDOR DEL MAPA ===== */
     #mapa {
-      flex: 1; /* Ocupa todo el espacio que queda libre */
+      flex-grow: 1; /* El mapa ocupa todo el espacio restante */
       width: 100%;
       position: relative;
-      z-index: 1; /* El mapa siempre debajo del marco */
     }
 
-    /* 4. CLASE PARA OCULTAR MARCO (MÓVIL) */
-    .marco-oculto {
-      transform: translateY(-100%);
-      position: absolute; /* Para que el mapa suba y ocupe su lugar */
-      width: 100%;
-      opacity: 0;
-    }
-
-    /* 5. AJUSTES PARA MÓVIL VERTICAL */
-    @media (max-width: 600px) {
-      #header-institucional { padding: 8px 10px; }
-      .logo-header { height: 50px; }
-      .header-center { flex: 3; }
-      
-      /* Ajuste visual del LayerSwitcher en móvil */
-      .ol-overlaycontainer-stopevent .idee-layerswitcher {
-          top: 10px !important;
+    /* ADAPTACIÓN MÓVIL */
+    @media (max-width: 768px) {
+      #header-institucional {
+        padding: 5px 10px;
+      }
+      .logo-header {
+        height: 50px;
+      }
+      .titulo-principal {
+        font-size: 0.9rem;
+      }
+      .btn-pdf-header {
+        padding: 4px 10px;
+        font-size: 10px;
       }
     }
   </style>
@@ -110,29 +126,32 @@
 
 <body>
 
-  <!-- MARCO SUPERIOR -->
+  <!-- ENCABEZADO -->
   <header id="header-institucional">
-    <div class="header-col header-left">
+    <!-- Top Left -->
+    <div class="header-left">
       <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Delegación" class="logo-header">
     </div>
 
-    <div class="header-col header-center">
+    <!-- Center -->
+    <div class="header-center">
       <h1 class="titulo-principal">Servicio regional del IGN en La Rioja y Navarra</h1>
       <a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-pdf-header">
         <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/INFO.png" alt="">
-        INFO VISIBILIDAD (PDF)
+        INFO VISIBILIDAD PDF
       </a>
     </div>
 
-    <div class="header-col header-right">
+    <!-- Top Right -->
+    <div class="header-right">
       <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_IGN.png" alt="IGN" class="logo-header">
     </div>
   </header>
 
-  <!-- CUERPO DEL MAPA -->
+  <!-- MAPA -->
   <div id="mapa" class="m-container"></div>
 
-  <!-- SCRIPTS API‑IDEE -->
+  <!-- SCRIPTS -->
   <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
   <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
   <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
@@ -143,76 +162,56 @@
     const mapa = IDEE.map({
       container: 'mapa',
       zoom: 9.5,
-      minZoom: 8,
-      center: [-273000, 5210000], 
+      minZoom: 9.5,
+      center: [-273000, 5220000], 
       controls: ['scaleline', 'location', 'rotate']
     });
 
-    // Capas
     const CCAA = new IDEE.layer.GeoJSON({
-        name: "Límite La Rioja", 
+        name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
         url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA_RIOJA(web_mercator).geojson',
         visibility: true
     });
     CCAA.setStyle(new IDEE.style.Generic({
       polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
     }));
-    
+    CCAA.setZIndex(20);
+    mapa.addLayers(CCAA);
+
     const capaCOG = new IDEE.layer.GeoTIFF({    
         url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
-        name: 'Sombra Eclipse'
-      }, { visibility: true, opacity: 0.8 });
+        name: 'Sombra La Rioja'
+      }, { visibility: true, opacity: 0.6 });
+    capaCOG.setZIndex(10);
+    mapa.addLayers(capaCOG);
 
     const ORTO_MA = new IDEE.layer.WMS({
       url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
       name: 'OI.OrthoimageCoverage',
-      legend: 'Ortofoto PNOA',
-      visibility: true
-    });
+      legend: 'ortofoto máxima actualisas PNOA',
+      maxZoom: 20,
+      minZoom: 4,
+      visibility: true,
+      tiled: false
+    }, { visibility: true, opacity: 1 });
+    ORTO_MA.setZIndex(1);
+    mapa.addLayers(ORTO_MA);
 
-    mapa.addLayers([ORTO_MA, capaCOG, CCAA]);
-
-    mapa.addPlugin(new IDEE.plugin.MouseSRS({ position: 'BL', srs: 'EPSG:4326', label: 'Lat, Lon' }));
+    mapa.addPlugin(new IDEE.plugin.MouseSRS({
+      position: 'BL',
+      srs: 'EPSG:4326',
+      label: 'WGS84 (lat, lon)',
+      precision: 4,
+    }));
 
     mapa.addPlugin(new IDEE.plugin.Layerswitcher({ 
       collapsed: true, 
       position: "TR", 
       collapsible: true, 
       modeSelectLayers: "eyes", 
+      tools: ["transparency", "legend", "zoom", "information"], 
       showCatalog: false 
     }));
-
-    // ================================================================
-    // GESTIÓN DINÁMICA DEL MARCO (PARA MÓVIL VERTICAL)
-    // ================================================================
-    const autoGestionarMarco = () => {
-      const header = document.getElementById('header-institucional');
-      const lsElement = document.querySelector('.idee-layerswitcher');
-      
-      if (!lsElement) return;
-
-      const estaAbierto = !lsElement.classList.contains('idee-collapsed');
-      const esMovil = window.innerWidth <= 600;
-
-      if (esMovil && estaAbierto) {
-        header.classList.add('marco-oculto');
-      } else {
-        header.classList.remove('marco-oculto');
-      }
-    };
-
-    // Observamos cambios en el LayerSwitcher (cuando se abre/cierra)
-    const observer = new MutationObserver(() => autoGestionarMarco());
-
-    setTimeout(() => {
-      const target = document.querySelector('.idee-layerswitcher');
-      if (target) {
-        observer.observe(target, { attributes: true, attributeFilter: ['class'] });
-      }
-    }, 1000);
-
-    window.addEventListener('resize', autoGestionarMarco);
-
   </script>
 </body>
 </html>
