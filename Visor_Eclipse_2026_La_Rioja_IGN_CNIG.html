@@ -192,11 +192,12 @@ const ORTO_MA = new IDEE.layer.WMS({
   url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
   name: 'OI.OrthoimageCoverage',
   legend: 'ortofoto máxima actualisas PNOA',
-  maxZoom: 20,
+  maxZoom: 10,
   minZoom: 6,
   visibility: true,
   tiled: false
 });
+capaCOG.setZIndex(20);
 mapa.addLayers(ORTO_MA);
 
 const capaCOG = new IDEE.layer.GeoTIFF({    
