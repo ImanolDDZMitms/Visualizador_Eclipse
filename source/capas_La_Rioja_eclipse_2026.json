@@ -1,6 +1,6 @@
 {
-    "GeoTIFF": {
-	"aemet": [
+"GeoTIFF": {
+"aemet": [
       {
         "url": "https://www.ign.es/resources/cnig/nubosidadCEPPM.tif",
         "name": "AEMET",
