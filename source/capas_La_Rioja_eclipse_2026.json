@@ -1,7 +1,6 @@
 {
-  
-  "GeoTIFF": {
-	"aemet": [
+    "GeoTIFF": {
+	"SOMBRA": [
       {
         "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
         "name": "SOMBRA",
