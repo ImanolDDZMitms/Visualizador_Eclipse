@@ -199,7 +199,7 @@ CCAA.setStyle(new IDEE.style.Generic({
   polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
 }));
 
-CCAA.setZIndex(1);
+CCAA.setZIndex(20);
 mapa.addLayers(CCAA);
 
 
@@ -222,7 +222,7 @@ const ORTO_MA = new IDEE.layer.WMS({
   visibility: true,
   tiled: false
 }, { visibility: true, opacity: 1 });
-ORTO_MA.setZIndex(20);
+ORTO_MA.setZIndex(1);
 mapa.addLayers(ORTO_MA);
 
 mapa.addPlugin(new IDEE.plugin.MouseSRS({
