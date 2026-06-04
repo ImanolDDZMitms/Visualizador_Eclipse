@@ -6,7 +6,11 @@
         "name": "SOMBRA",
         "legend": "SOMBRA_ECLIPSE_2026_EN_LA_RIOJA",
         "extract": false
-      }
+      },
+	  {},
+      {
+		"opacity": 0.3
+	  }
     ]
   },
     "GeoTIFF": {
