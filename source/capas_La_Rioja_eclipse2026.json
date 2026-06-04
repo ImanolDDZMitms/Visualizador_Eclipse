@@ -12,5 +12,20 @@
 		    "opacity": 0.6
 	    }
     ]
-  }
+  },
+  "GEOJSON": {
+  "CCAA DE LA RIOJA": [
+    {
+      "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA_RIOJA(web_mercator).geojson",
+      "name": "CCAA DE LA RIOJA",
+      "legend": "LIMITES DE LA COMUNIDAD AUTÓNOMA DE LA RIOJA",
+      "extract": true,
+      "label": false,
+      "visibility": true
+    },
+    {
+      "displayInLayerSwitcher": true
+    }
+  ]
+},
 }
