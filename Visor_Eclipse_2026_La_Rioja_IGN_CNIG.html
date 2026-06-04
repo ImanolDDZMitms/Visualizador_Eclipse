@@ -188,6 +188,14 @@ const mapa = IDEE.map({
   controls: ['scaleline', 'location', 'rotate']
 });
 
+const capaCOG = new IDEE.layer.GeoTIFF({    
+    url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
+    name: 'Sombra La Rioja',
+    legend: 'Sombra La Rioja ECLIPSE 2026'
+  }, { visibility: true, opacity: 1 });
+capaCOG.setZIndex(10);
+mapa.addLayers(capaCOG);
+
 const ORTO_MA = new IDEE.layer.WMS({
   url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
   name: 'OI.OrthoimageCoverage',
@@ -197,16 +205,7 @@ const ORTO_MA = new IDEE.layer.WMS({
   visibility: true,
   tiled: false
 }, { visibility: true, opacity: 1 });
-
 mapa.addLayers(ORTO_MA);
-
-const capaCOG = new IDEE.layer.GeoTIFF({    
-    url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
-    name: 'Sombra La Rioja',
-    legend: 'Sombra La Rioja ECLIPSE 2026'
-  }, { visibility: true, opacity: 1 });
-capaCOG.setZIndex(10);
-mapa.addLayers(capaCOG);
 
 var CCAA = new IDEE.layer.GeoJSON({
     name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
