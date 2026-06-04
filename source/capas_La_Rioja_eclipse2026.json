@@ -1,15 +1,15 @@
 {
   "GeoTIFF": {
-	"aemet": [
+	"sombreado": [
       {
         "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
-        "name": "AEMET",
-        "legend": "El tiempo AEMET",
+        "name": "sombreado eclipse",
+        "legend": "La sombra del eclipse 2026 en La Rioja",
         "extract": false
       },
 	    {},
       {
-		    "opacity": 0.3
+		    "opacity": 0.6
 	    }
     ]
   }
