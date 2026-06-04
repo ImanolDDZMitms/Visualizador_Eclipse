@@ -24,7 +24,6 @@
       height: 100%;
       overflow: hidden;
     }
-    /* Asegura que el contenedor ocupe toda la pantalla */
     #mapa {
       width: 100%;
       height: 100vh;
@@ -33,80 +32,90 @@
       left: 0;
     }
 
-    /* ===== CABECERA IGN ===== */
+    /* ===== CABECERA IGN CENTRADA Y RESPONSIVE ===== */
     #cabecera-ign {
       position: absolute;
       top: 10px;
-      left: 10px;
+      left: 0;
+      width: 100%;
       z-index: 1000;
       display: flex;
+      justify-content: space-between; /* Logo1 - Texto - Logo2 */
       align-items: center;
-      gap: 10px;
-      font-family: Arial, sans-serif;
-      max-width: calc(100vw - 20px);
+      padding: 0 15px;
+      box-sizing: border-box;
+      pointer-events: none; /* Permite clicks en el mapa a través de los huecos */
+    }
+
+    #cabecera-ign > * {
+      pointer-events: auto; /* Reactiva clicks en los elementos de la cabecera */
+    }
+
+    .logo-img {
+      height: 50px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
 
     .titulo-ign {
       background-color: rgba(255, 255, 255, 0.95);
-      padding: 8px 12px;
+      padding: 8px 15px;
       border-radius: 4px;
-      font-size: 14px;
+      font-size: 16px;
       font-weight: bold;
       color: #333;
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-      white-space: nowrap;
+      text-align: center;
+      font-family: Arial, sans-serif;
+      margin: 0 10px;
     }
 
-    /* ===== BOTÓN PDF INFO ===== */
+    /* ===== BOTÓN PDF INFO (REDUCIDO Y COLORES INVERTIDOS) ===== */
     .btn-info-pdf {
       position: absolute;
-      bottom: 110px; /* Ajustado para que no tape la escala o el logo del IGN */
+      bottom: 110px;
       right: 20px;
       z-index: 1001;
-      background-color: #ffffff;
+      background-color: #007bff; /* Fondo Azul */
       border-radius: 50%;
-      width: 50px;
-      height: 50px;
+      width: 46px; /* 4px más pequeño que antes (2px de radio menos) */
+      height: 46px;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       cursor: pointer;
-      transition: transform 0.2s, background-color 0.2s;
-      border: 2px solid #007bff;
+      transition: transform 0.2s;
+      border: 2px solid #ffffff; /* Borde Blanco */
       text-decoration: none;
     }
 
     .btn-info-pdf:hover {
       transform: scale(1.1);
-      background-color: #f0f7ff;
+      background-color: #0056b3;
     }
 
     .btn-info-pdf svg {
-      width: 30px;
-      height: 30px;
-      fill: #007bff;
+      width: 28px;
+      height: 28px;
+      fill: #ffffff; /* Icono Blanco */
     }
 
-    /* Tooltip simple al pasar el ratón */
-    .btn-info-pdf::after {
-      content: "Más información (PDF)";
-      position: absolute;
-      right: 60px;
-      background: #333;
-      color: #fff;
-      padding: 5px 10px;
-      border-radius: 4px;
-      font-size: 12px;
-      white-space: nowrap;
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s;
-      font-family: Arial, sans-serif;
-    }
-
-    .btn-info-pdf:hover::after {
-      opacity: 1;
+    /* ===== ADAPTACIÓN MÓVIL ===== */
+    @media (max-width: 600px) {
+      .titulo-ign {
+        font-size: 11px; /* Texto reducido */
+        padding: 5px 8px;
+        line-height: 1.2;
+        max-width: 40%;
+      }
+      .logo-img {
+        height: 35px; /* Logos reducidos */
+      }
+      #cabecera-ign {
+        top: 5px;
+        padding: 0 5px;
+      }
     }
 
   </style>
@@ -119,13 +128,20 @@
 
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <div id="cabecera-ign">
+  <!-- Logo Izquierda (Logo 1) -->
+  <img src="logo1.png" alt="Logo 1" class="logo-img">
+
+  <!-- Texto Centrado -->
   <div class="titulo-ign">
     Servicio regional del IGN en La Rioja y Navarra
   </div>
+
+  <!-- Logo Derecha (Logo 2) -->
+  <img src="logo2.png" alt="Logo 2" class="logo-img">
 </div>
 
 <!-- ===== BOTÓN DE INFORMACIÓN PDF ===== -->
-<a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Ver guía del Eclipse">
+<a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/informacion.pdf" target="_blank" class="btn-info-pdf" title="Ver guía del Eclipse">
   <svg viewBox="0 0 24 24">
     <path d="M11,9H13V7H11V9M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
   </svg>
@@ -149,7 +165,7 @@ const mapa = IDEE.map({
   container: 'mapa',
   zoom: 9.5,
   minZoom: 9.5,
-  center: [-273000, 5202000], // La Rioja (EPSG:3857)
+  center: [-273000, 5202000], 
   controls: [
     'scaleline',
     'location',
@@ -162,7 +178,7 @@ const mapa = IDEE.map({
  ************************************************/
 const capaCOG = new IDEE.layer.GeoTIFF(
   {    
-    url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
+    url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rio_Sombra_COG_WM.tif',
     name: 'Sombra La Rioja',
     legend: 'Sombra La Rioja ECLIPSE 2026'
   },
