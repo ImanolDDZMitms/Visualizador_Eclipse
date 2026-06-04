@@ -12,113 +12,107 @@
   <link href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
 
   <style>
-    /* Reset y estructura base */
+    /* Reset total */
+    * { box-sizing: border-box; }
+    
     html, body {
       margin: 0;
       padding: 0;
       height: 100%;
+      width: 100%;
       display: flex;
-      flex-direction: column; /* Organiza encabezado arriba y mapa abajo */
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      overflow: hidden;
+      flex-direction: column; /* Encabezado arriba, mapa abajo */
+      font-family: Arial, Helvetica, sans-serif;
+      overflow: hidden; /* Evita scrolls dobles */
     }
 
     /* ===== ENCABEZADO FUERA DEL MAPA ===== */
     #header-institucional {
-      background-color: #f0f7ff; /* Azul claro suave */
-      border-bottom: 4px solid #ffffff; /* Borde blanco grueso */
+      flex-shrink: 0; /* Impide que el mapa lo aplaste */
+      background-color: #e3f2fd; /* Azul claro suave */
+      border-bottom: 5px solid #ffffff; /* Borde blanco */
       display: flex;
-      justify-content: space-between; /* Izquierda, Centro, Derecha */
+      justify-content: space-between;
       align-items: center;
-      padding: 10px 20px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      z-index: 1001;
+      padding: 10px 15px;
+      position: relative; /* Necesario para el z-index */
+      z-index: 9999; /* Valor altísimo para estar sobre el LayerSwitcher */
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      min-height: 100px;
     }
 
-    /* Logo Izquierdo (Delegación) */
-    .header-left {
-      flex: 1;
+    /* Columnas del encabezado */
+    .header-col {
       display: flex;
-      justify-content: flex-start;
-    }
-
-    /* Bloque Central (Texto y Botón) */
-    .header-center {
-      flex: 2;
-      display: flex;
-      flex-direction: column;
       align-items: center;
-      gap: 8px;
-      text-align: center;
+      justify-content: center;
     }
 
-    /* Logo Derecho (IGN) */
-    .header-right {
-      flex: 1;
-      display: flex;
-      justify-content: flex-end;
-    }
+    .header-left { flex: 0 0 20%; justify-content: flex-start; }
+    .header-center { flex: 0 0 55%; flex-direction: column; gap: 5px; }
+    .header-right { flex: 0 0 20%; justify-content: flex-end; }
 
+    /* Logos */
     .logo-header {
-      height: 80px; /* Tamaño ajustable */
+      max-height: 85px;
+      max-width: 100%;
       width: auto;
-      object-fit: contain;
+      display: block;
     }
 
+    /* Texto */
     .titulo-principal {
-      font-size: 1.2rem;
+      font-size: 16px;
       font-weight: bold;
       color: #003366;
       margin: 0;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
+      text-align: center;
+      line-height: 1.2;
     }
 
-    /* Botón PDF integrado en el encabezado */
+    /* Botón PDF */
     .btn-pdf-header {
       background-color: #d32f2f;
       color: white;
       text-decoration: none;
-      padding: 6px 15px;
-      border-radius: 20px;
-      font-size: 12px;
+      padding: 5px 12px;
+      border-radius: 4px;
+      font-size: 11px;
       font-weight: bold;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 5px;
       transition: background 0.3s;
     }
 
-    .btn-pdf-header:hover {
-      background-color: #b71c1c;
-    }
-
     .btn-pdf-header img {
-      height: 16px;
+      height: 14px;
       filter: brightness(0) invert(1);
     }
 
     /* ===== CONTENEDOR DEL MAPA ===== */
     #mapa {
-      flex-grow: 1; /* El mapa ocupa todo el espacio restante */
+      flex-grow: 1; /* Ocupa todo el resto de la pantalla */
       width: 100%;
       position: relative;
+      z-index: 1;
     }
 
-    /* ADAPTACIÓN MÓVIL */
-    @media (max-width: 768px) {
+    /* ADAPTACIÓN MÓVIL (Versión Desktop-like) */
+    @media (max-width: 600px) {
       #header-institucional {
+        min-height: 80px;
         padding: 5px 10px;
       }
       .logo-header {
-        height: 50px;
+        max-height: 50px; /* Reducción proporcional para que no desaparezcan */
       }
       .titulo-principal {
-        font-size: 0.9rem;
+        font-size: 11px;
       }
       .btn-pdf-header {
-        padding: 4px 10px;
-        font-size: 10px;
+        padding: 3px 8px;
+        font-size: 9px;
       }
     }
   </style>
@@ -129,21 +123,21 @@
   <!-- ENCABEZADO -->
   <header id="header-institucional">
     <!-- Top Left -->
-    <div class="header-left">
+    <div class="header-col header-left">
       <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Delegación" class="logo-header">
     </div>
 
     <!-- Center -->
-    <div class="header-center">
-      <h1 class="titulo-principal">Servicio regional del IGN en La Rioja y Navarra</h1>
+    <div class="header-col header-center">
+      <p class="titulo-principal">Servicio regional del IGN en La Rioja y Navarra</p>
       <a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-pdf-header">
         <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/INFO.png" alt="">
-        INFO VISIBILIDAD PDF
+        INFO ECLIPSE 2026 (PDF)
       </a>
     </div>
 
     <!-- Top Right -->
-    <div class="header-right">
+    <div class="header-col header-right">
       <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_IGN.png" alt="IGN" class="logo-header">
     </div>
   </header>
@@ -159,6 +153,7 @@
   <script src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
   <script>
+    // Inicialización del mapa
     const mapa = IDEE.map({
       container: 'mapa',
       zoom: 9.5,
@@ -167,40 +162,35 @@
       controls: ['scaleline', 'location', 'rotate']
     });
 
+    // Capas
     const CCAA = new IDEE.layer.GeoJSON({
-        name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
+        name: "Límite La Rioja", 
         url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA_RIOJA(web_mercator).geojson',
         visibility: true
     });
     CCAA.setStyle(new IDEE.style.Generic({
       polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
     }));
-    CCAA.setZIndex(20);
-    mapa.addLayers(CCAA);
-
+    
     const capaCOG = new IDEE.layer.GeoTIFF({    
         url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
-        name: 'Sombra La Rioja'
-      }, { visibility: true, opacity: 0.6 });
-    capaCOG.setZIndex(10);
-    mapa.addLayers(capaCOG);
+        name: 'Sombra Eclipse'
+      }, { visibility: true, opacity: 0.8 });
 
     const ORTO_MA = new IDEE.layer.WMS({
       url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
       name: 'OI.OrthoimageCoverage',
-      legend: 'ortofoto máxima actualisas PNOA',
-      maxZoom: 20,
-      minZoom: 4,
-      visibility: true,
-      tiled: false
-    }, { visibility: true, opacity: 1 });
-    ORTO_MA.setZIndex(1);
-    mapa.addLayers(ORTO_MA);
+      legend: 'Ortofoto PNOA',
+      visibility: true
+    });
 
+    mapa.addLayers([ORTO_MA, capaCOG, CCAA]);
+
+    // Plugins
     mapa.addPlugin(new IDEE.plugin.MouseSRS({
       position: 'BL',
       srs: 'EPSG:4326',
-      label: 'WGS84 (lat, lon)',
+      label: 'Lat, Lon',
       precision: 4,
     }));
 
@@ -209,7 +199,6 @@
       position: "TR", 
       collapsible: true, 
       modeSelectLayers: "eyes", 
-      tools: ["transparency", "legend", "zoom", "information"], 
       showCatalog: false 
     }));
   </script>
