@@ -12,19 +12,5 @@
 		    "opacity": 0.6
 	    }
     ]
-  },
-  "WFS": {
-  "ORTOFOTO": [
-    {
-      "url": "https://www.ign.es/wms-inspire/pnoa-ma?",
-      "name": "ORTOFOTO MA",
-      "version": "1.1.0",
-      "legend": "ORTOFOTO MAXIMA ACTUALIDAD",
-      "extract": false
-    },
-    {
-      "displayInLayerSwitcher": true
-    }
-    ]
   }
 }
