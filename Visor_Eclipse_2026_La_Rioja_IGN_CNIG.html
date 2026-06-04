@@ -188,6 +188,17 @@ const mapa = IDEE.map({
   controls: ['scaleline', 'location', 'rotate']
 });
 
+const ORTO_MA = new IDEE.layer.WMS({
+  url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
+  name: 'OI.OrthoimageCoverage',
+  legend: 'ortofoto máxima actualisas PNOA',
+  maxZoom: 20,
+  minZoom: 6,
+  visibility: true,
+  tiled: false
+});
+mapa.addLayers(ORTO_MA);
+
 const capaCOG = new IDEE.layer.GeoTIFF({    
     url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
     name: 'Sombra La Rioja',
