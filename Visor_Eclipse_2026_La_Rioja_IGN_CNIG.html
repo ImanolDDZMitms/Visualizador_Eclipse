@@ -40,19 +40,34 @@
       width: 100%;
       z-index: 1000;
       display: flex;
-      justify-content: space-between; /* Logo1 - Texto - Logo2 */
+      justify-content: space-between; 
       align-items: center;
       padding: 0 15px;
       box-sizing: border-box;
-      pointer-events: none; /* Permite clicks en el mapa a través de los huecos */
+      pointer-events: none;
     }
 
     #cabecera-ign > * {
-      pointer-events: auto; /* Reactiva clicks en los elementos de la cabecera */
+      pointer-events: auto;
     }
 
-    .logo-img {
+    /* Contenedor central para Logo 2 y Texto */
+    .contenedor-central {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5px;
+      flex-grow: 1;
+    }
+
+    .logo1 {
       height: 50px;
+      width: auto;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .logo2 {
+      height: 55px; /* 5px más grande que el original */
       width: auto;
       filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
     }
@@ -67,54 +82,57 @@
       box-shadow: 0 4px 6px rgba(0,0,0,0.2);
       text-align: center;
       font-family: Arial, sans-serif;
-      margin: 0 10px;
     }
 
-    /* ===== BOTÓN PDF INFO (REDUCIDO Y COLORES INVERTIDOS) ===== */
+    /* Espaciador invisible a la derecha para mantener el centro perfecto */
+    .spacer-derecha {
+      width: 50px; 
+    }
+
+    /* ===== BOTÓN PDF INFO (MÁS PEQUEÑO E INVERTIDO) ===== */
     .btn-info-pdf {
       position: absolute;
       bottom: 110px;
       right: 20px;
       z-index: 1001;
-      background-color: #007bff; /* Fondo Azul */
+      background-color: #007bff;
       border-radius: 50%;
-      width: 46px; /* 4px más pequeño que antes (2px de radio menos) */
-      height: 46px;
+      width: 42px; /* Reducido otros 2px de radio (4px de diámetro) */
+      height: 42px;
       display: flex;
       align-items: center;
       justify-content: center;
       box-shadow: 0 4px 10px rgba(0,0,0,0.3);
       cursor: pointer;
       transition: transform 0.2s;
-      border: 2px solid #ffffff; /* Borde Blanco */
+      border: 2px solid #ffffff;
       text-decoration: none;
     }
 
     .btn-info-pdf:hover {
       transform: scale(1.1);
-      background-color: #0056b3;
     }
 
     .btn-info-pdf svg {
-      width: 28px;
-      height: 28px;
-      fill: #ffffff; /* Icono Blanco */
+      width: 24px; /* Proporcional al nuevo tamaño */
+      height: 24px;
+      fill: #ffffff;
     }
 
     /* ===== ADAPTACIÓN MÓVIL ===== */
     @media (max-width: 600px) {
       .titulo-ign {
-        font-size: 11px; /* Texto reducido */
-        padding: 5px 8px;
-        line-height: 1.2;
-        max-width: 40%;
+        font-size: 10px;
+        padding: 4px 8px;
       }
-      .logo-img {
-        height: 35px; /* Logos reducidos */
+      .logo1 {
+        height: 35px;
       }
-      #cabecera-ign {
-        top: 5px;
-        padding: 0 5px;
+      .logo2 {
+        height: 40px;
+      }
+      .spacer-derecha {
+        width: 35px;
       }
     }
 
@@ -123,25 +141,27 @@
 
 <body>
 
-<!-- CONTENEDOR DEL MAPA -->
 <div id="mapa" class="m-container"></div>
 
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <div id="cabecera-ign">
-  <!-- Logo Izquierda (Logo 1) -->
-  <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_Dele.png" alt="Logo 1" class="logo-img">
+  <!-- Logo 1 (Izquierda) -->
+  <img src="logo1.png" alt="Logo 1" class="logo1">
 
-  <!-- Texto Centrado -->
-  <div class="titulo-ign">
-    Servicio regional del IGN en La Rioja y Navarra
+  <!-- Centro: Logo 2 ENCIMA del Texto -->
+  <div class="contenedor-central">
+    <img src="logo2.png" alt="Logo 2" class="logo2">
+    <div class="titulo-ign">
+      Servicio regional del IGN en La Rioja y Navarra
+    </div>
   </div>
 
-  <!-- Logo Derecha (Logo 2) -->
-  <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Imagen_IGN.png" alt="Logo 2" class="logo-img">
+  <!-- Espaciador para equilibrar el Logo 1 y que el centro sea real -->
+  <div class="spacer-derecha"></div>
 </div>
 
 <!-- ===== BOTÓN DE INFORMACIÓN PDF ===== -->
-<a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Ver guía del Eclipse">
+<a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/informacion.pdf" target="_blank" class="btn-info-pdf">
   <svg viewBox="0 0 24 24">
     <path d="M11,9H13V7H11V9M12,20C7.59,20 4,16.41 4,12C4,7.59 7.59,4 12,4C16.41,4 20,7.59 20,12C20,16.41 16.41,20 12,20M12,2A10,10 0 0,0 2,12A10,10 0 0,0 12,22A10,10 0 0,0 22,12A10,10 0 0,0 12,2M11,17H13V11H11V17Z" />
   </svg>
@@ -153,80 +173,46 @@
 <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
 
-<!-- ===== PLUGINS ===== -->
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs.ol.min.js"></script>
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
 <script>
-/************************************************
- MAPA BASE
- ************************************************/
 const mapa = IDEE.map({
   container: 'mapa',
   zoom: 9.5,
   minZoom: 9.5,
   center: [-273000, 5202000], 
-  controls: [
-    'scaleline',
-    'location',
-    'backgroundlayers'
-  ]
+  controls: ['scaleline', 'location', 'backgroundlayers']
 });
 
-/************************************************
- COG DIRECTO SOBRE EL MAPA
- ************************************************/
-const capaCOG = new IDEE.layer.GeoTIFF(
-  {    
+const capaCOG = new IDEE.layer.GeoTIFF({    
     url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
     name: 'Sombra La Rioja',
     legend: 'Sombra La Rioja ECLIPSE 2026'
-  },
-  {
-    visibility: true,
-    opacity: 1
-  }
-);
+  }, { visibility: true, opacity: 1 });
 capaCOG.setZIndex(10);
 mapa.addLayers(capaCOG);
 
-/************************************************
- GEOJSON CCAA
- ************************************************/
-var CCAA = new IDEE.layer.GeoJSON(
-  {
+var CCAA = new IDEE.layer.GeoJSON({
     name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
     url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA_RIOJA(web_mercator).geojson',
     legend: 'CCAA La Rioja', 
     visibility: true
 });
 
-let estilo_CCAA = new IDEE.style.Generic({
-  polygon: {
-    fill: { color: 'green', opacity: 0 },
-    stroke: { color: '#FF0000', width: 3 }
-  }
-});
-          
-CCAA.setStyle(estilo_CCAA);
+CCAA.setStyle(new IDEE.style.Generic({
+  polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
+}));
 mapa.addLayers(CCAA);
 
-/************************************************
- COORDENADAS MOUSERSRS
- ************************************************/
-const mousesrs = new IDEE.plugin.MouseSRS({
+mapa.addPlugin(new IDEE.plugin.MouseSRS({
   position: 'BL',
-  tooltip: 'Muestra coordenadas',
   srs: 'EPSG:4326',
   label: 'WGS84 (lat, lon)',
   precision: 4,
-});
-mapa.addPlugin(mousesrs);
+}));
 
-/************************************************
- Layerswitcher
- ************************************************/
-const selectorcapas = new IDEE.plugin.Layerswitcher({ 
+mapa.addPlugin(new IDEE.plugin.Layerswitcher({ 
   collapsed: !0, 
   position: "TR", 
   collapsible: !0, 
@@ -237,9 +223,7 @@ const selectorcapas = new IDEE.plugin.Layerswitcher({
   https: !0, 
   http: !0, 
   showCatalog: !1 
-});
-mapa.addPlugin(selectorcapas);
-
+}));
 </script>
 </body>
 </html>
