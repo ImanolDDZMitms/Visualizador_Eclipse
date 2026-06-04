@@ -4,7 +4,7 @@
       {
         "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
         "name": "sombreado eclipse",
-        "legend": "La sombra del eclipse 2026 en La Rioja",
+        "legend": "Sombra 5m eclipse 2026 La Rioja",
         "extract": false
       },
 	    {},
