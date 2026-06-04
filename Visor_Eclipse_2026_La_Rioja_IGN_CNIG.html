@@ -12,9 +12,7 @@
   <link href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
 
   <style>
-    /* Reset total */
-    * { box-sizing: border-box; }
-    
+    /* Estructura Base */
     html, body {
       margin: 0;
       padding: 0;
@@ -22,105 +20,112 @@
       width: 100%;
       display: flex;
       flex-direction: column; /* Encabezado arriba, mapa abajo */
-      font-family: Arial, Helvetica, sans-serif;
-      overflow: hidden; /* Evita scrolls dobles */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      background-color: #ffffff;
     }
 
-    /* ===== ENCABEZADO FUERA DEL MAPA ===== */
+    /* ===== ENCABEZADO SUPERIOR (FUERA DEL MAPA) ===== */
     #header-institucional {
-      flex-shrink: 0; /* Impide que el mapa lo aplaste */
-      background-color: #e3f2fd; /* Azul claro suave */
-      border-bottom: 5px solid #ffffff; /* Borde blanco */
+      flex: 0 0 auto; /* El encabezado solo ocupa su espacio necesario */
+      background-color: #f0f7ff; /* Azul claro suave */
+      border-bottom: 6px solid #ffffff; /* Borde blanco grueso pedido */
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 15px;
-      position: relative; /* Necesario para el z-index */
-      z-index: 9999; /* Valor altísimo para estar sobre el LayerSwitcher */
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      min-height: 100px;
+      padding: 10px 30px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+      z-index: 10; /* Suficiente para estar sobre el mapa pero sin romper plugins */
     }
 
-    /* Columnas del encabezado */
     .header-col {
       display: flex;
       align-items: center;
-      justify-content: center;
     }
 
-    .header-left { flex: 0 0 20%; justify-content: flex-start; }
-    .header-center { flex: 0 0 55%; flex-direction: column; gap: 5px; }
-    .header-right { flex: 0 0 20%; justify-content: flex-end; }
+    .header-left { flex: 1; justify-content: flex-start; }
+    .header-center { flex: 2; flex-direction: column; gap: 8px; }
+    .header-right { flex: 1; justify-content: flex-end; }
 
-    /* Logos */
+    /* Imagenes Proporcionales */
     .logo-header {
-      max-height: 85px;
-      max-width: 100%;
+      height: clamp(50px, 8vh, 90px); /* Escala proporcionalmente */
       width: auto;
-      display: block;
+      object-fit: contain;
     }
 
-    /* Texto */
+    /* Texto con Escala Proporcional */
     .titulo-principal {
-      font-size: 16px;
-      font-weight: bold;
+      /* clamp(mínimo, preferido, máximo) */
+      font-size: clamp(13px, 2.5vw, 24px); 
+      font-weight: 800;
       color: #003366;
       margin: 0;
       text-align: center;
-      line-height: 1.2;
+      line-height: 1.1;
+      text-transform: uppercase;
     }
 
     /* Botón PDF */
     .btn-pdf-header {
       background-color: #d32f2f;
-      color: white;
+      color: white !important;
       text-decoration: none;
-      padding: 5px 12px;
+      padding: 6px 14px;
       border-radius: 4px;
-      font-size: 11px;
+      font-size: clamp(10px, 1.2vw, 13px);
       font-weight: bold;
       display: flex;
       align-items: center;
-      gap: 5px;
-      transition: background 0.3s;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+
+    .btn-pdf-header:hover {
+      background-color: #b71c1c;
+      transform: translateY(-1px);
     }
 
     .btn-pdf-header img {
-      height: 14px;
+      height: 16px;
       filter: brightness(0) invert(1);
     }
 
     /* ===== CONTENEDOR DEL MAPA ===== */
     #mapa {
-      flex-grow: 1; /* Ocupa todo el resto de la pantalla */
+      flex: 1 1 auto; /* Toma todo el espacio restante */
       width: 100%;
       position: relative;
-      z-index: 1;
     }
 
-    /* ADAPTACIÓN MÓVIL (Versión Desktop-like) */
-    @media (max-width: 600px) {
+    /* ===== AJUSTES ESPECÍFICOS PARA MÓVIL VERTICAL (Portrait) ===== */
+    @media (max-width: 600px) and (orientation: portrait) {
       #header-institucional {
-        min-height: 80px;
-        padding: 5px 10px;
+        padding: 8px 10px;
+        min-height: 90px;
+      }
+      .header-center {
+        flex: 3; /* Más espacio al texto en móvil */
       }
       .logo-header {
-        max-height: 50px; /* Reducción proporcional para que no desaparezcan */
+        height: 45px; /* Logos más pequeños para que no "empujen" el mapa hacia abajo */
       }
       .titulo-principal {
-        font-size: 11px;
+        letter-spacing: -0.5px;
       }
-      .btn-pdf-header {
-        padding: 3px 8px;
-        font-size: 9px;
-      }
+    }
+
+    /* Ajuste para evitar que el LayerSwitcher se pegue al borde superior en exceso */
+    .ol-overlaycontainer-stopevent .idee-layerswitcher {
+        top: 15px !important; 
     }
   </style>
 </head>
 
 <body>
 
-  <!-- ENCABEZADO -->
+  <!-- ENCABEZADO INSTITUCIONAL -->
   <header id="header-institucional">
     <!-- Top Left -->
     <div class="header-col header-left">
@@ -129,10 +134,10 @@
 
     <!-- Center -->
     <div class="header-col header-center">
-      <p class="titulo-principal">Servicio regional del IGN en La Rioja y Navarra</p>
+      <h1 class="titulo-principal">Servicio regional del IGN en La Rioja y Navarra</h1>
       <a href="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-pdf-header">
         <img src="https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/INFO.png" alt="">
-        INFO ECLIPSE 2026 (PDF)
+        INFO VISIBILIDAD (PDF)
       </a>
     </div>
 
@@ -142,10 +147,10 @@
     </div>
   </header>
 
-  <!-- MAPA -->
+  <!-- CONTENEDOR DEL MAPA -->
   <div id="mapa" class="m-container"></div>
 
-  <!-- SCRIPTS -->
+  <!-- SCRIPTS API‑IDEE -->
   <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
   <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
   <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
@@ -153,7 +158,6 @@
   <script src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
   <script>
-    // Inicialización del mapa
     const mapa = IDEE.map({
       container: 'mapa',
       zoom: 9.5,
