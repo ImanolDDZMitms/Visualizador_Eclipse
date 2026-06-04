@@ -1,5 +1,5 @@
 {
- "GeoTIFF": {
+    "GeoTIFF": {
     "SOMBRA": [
       {
         "url": "https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif",
@@ -7,6 +7,20 @@
         "legend": "SOMBRA_ECLIPSE_2026_EN_LA_RIOJA",
         "extract": false
       }
+    ]
+  },
+    "GeoTIFF": {
+	"aemet": [
+      {
+        "url": "https://www.ign.es/resources/cnig/nubosidadCEPPM.tif",
+        "name": "AEMET",
+        "legend": "El tiempo AEMET",
+        "extract": false
+      },
+	  {},
+      {
+		"opacity": 0.3
+	  }
     ]
   }
 }
