@@ -218,8 +218,8 @@ CCAA.setStyle(new IDEE.style.Generic({
   polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
 }));
 
-mapa.addLayers(CCAA,capaCOG,ORTO_MA);
-
+mapa.addLayers(CCAA);
+mapa.addLayers(capaCOG, ORTO_MA);
 
 mapa.addPlugin(new IDEE.plugin.MouseSRS({
   position: 'BL',
