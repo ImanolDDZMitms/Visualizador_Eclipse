@@ -167,8 +167,7 @@
       controls: ['scaleline', 'location', 'rotate']
     });
 
-    var CCAA = new IDEE.layer.GeoJSON({
-         
+    const CCAA = new IDEE.layer.GeoJSON({
         url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA_RIOJA(web_mercator).geojson',
         name: "COMUNIDAD AUTÓNOMA DE LA RIOJA",
         visibility: true
@@ -181,7 +180,7 @@
 
     const capaCOG = new IDEE.layer.GeoTIFF({    
         url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
-        name: 'Sombra La Rioja'
+        name: 'Sombra eclupse 5m La Rioja'
       }, { visibility: true, opacity: 0.6 });
     capaCOG.setZIndex(10);
     mapa.addLayers(capaCOG);
@@ -189,7 +188,7 @@
     const ORTO_MA = new IDEE.layer.WMS({
       url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
       name: 'OI.OrthoimageCoverage',
-      legend: 'ortofoto máxima actualisas PNOA',
+      legend: 'Ortofoto PNOA máxima actualidad',
       maxZoom: 20,
       minZoom: 4,
       visibility: true,
