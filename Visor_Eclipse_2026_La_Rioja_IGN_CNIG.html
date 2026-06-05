@@ -190,7 +190,7 @@ controls: ['scaleline', 'location', 'rotate']
 
 const CCAA = new IDEE.layer.GeoJSON({
 name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
-url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/LA_RIOJA(web_mercator).geojson',
+url: '/source/LA_RIOJA(web_mercator).geojson',
 legend: 'CCAA La Rioja', 
 visibility: true
 });
@@ -205,7 +205,7 @@ mapa.addLayers(CCAA);
 
 
 const capaCOG = new IDEE.layer.GeoTIFF({    
-url: 'https://visualizador-eclipse-2026-ign-cnig.vercel.app/source/La_Rioja_Sombra_COG_WM.tif',
+url: '/source/La_Rioja_Sombra_COG_WM.tif',
 name: 'Sombra La Rioja',
 legend: 'Sombra La Rioja ECLIPSE 2026'
 }, { visibility: true, opacity: 1 });
