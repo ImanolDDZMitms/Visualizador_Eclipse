@@ -204,21 +204,21 @@ mapa.addLayers(CCAA);
 
 
 
-const capaCOG = new IDEE.layer.GeoTIFF({    
+const capaCOG_LR = new IDEE.layer.GeoTIFF({    
 url: '/source/La_Rioja_Sombra_COG_WM.tif',
 name: 'Sombra La Rioja',
 legend: 'Sombra La Rioja ECLIPSE 2026'
 }, { visibility: true, opacity: 0.6 });
-capaCOG.setZIndex(10);
-mapa.addLayers(capaCOG);
+capaCOG_LR.setZIndex(10);
+mapa.addLayers(capaCOG_LR);
 
-const capaCOG = new IDEE.layer.GeoTIFF({    
+const capaCOG_NA = new IDEE.layer.GeoTIFF({    
 url: '/source/Navarra_Sombra_COG_WM.tif',
 name: 'Sombra Navarra',
 legend: 'Sombra Navarra ECLIPSE 2026'
 }, { visibility: true, opacity: 0.6 });
-capaCOG.setZIndex(11);
-mapa.addLayers(capaCOG);
+capaCOG_NA.setZIndex(11);
+mapa.addLayers(capaCOG_NA);
 
 
 const ORTO_MA = new IDEE.layer.WMS({
