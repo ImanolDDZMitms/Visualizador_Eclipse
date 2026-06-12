@@ -188,10 +188,17 @@ center: [-273000, 5220000],
 controls: ['scaleline', 'location', 'rotate']
 });
 
-const CCAA = new IDEE.layer.GeoJSON({
+const CCAA_LR = new IDEE.layer.GeoJSON({
 name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
-url: '/source/LA_RIOJA(web_mercator).geojson',
+url: '/source/LA_RIOJA.geojson',
 legend: 'CCAA La Rioja', 
+visibility: true
+});
+
+const CCAA_NA = new IDEE.layer.GeoJSON({
+name: "COMUNIDAD AUTÓNOMA DE NAVARRA", 
+url: '/source/NAVARRA.geojson',
+legend: 'CCAA Navarra', 
 visibility: true
 });
 
