@@ -202,6 +202,13 @@ legend: 'CCAA Navarra',
 visibility: true
 });
 
+const UMBRIA = new IDEE.layer.GeoJSON({
+name: "UMBRIA", 
+url: '/source/UMBRIA.geojson',
+legend: 'Umbria', 
+visibility: true
+});
+
 CCAA_LR.setStyle(new IDEE.style.Generic({
 polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
 }));
@@ -210,11 +217,17 @@ CCAA_NA.setStyle(new IDEE.style.Generic({
 polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
 }));
 
+UMBRIA.setStyle(new IDEE.style.Generic({
+polygon: { fill: { color: 'blue', opacity: 0.2 }, stroke: { color: 'gray', width: 3 } }
+}));
+
 CCAA_LR.setZIndex(20);
 CCAA_NA.setZIndex(20);
+CCAA_NA.setZIndex(20);
+UMBRIA.setZIndex(20);
 mapa.addLayers(CCAA_LR);
 mapa.addLayers(CCAA_NA);
-
+mapa.addLayers(UMBRIA);
 
 
 const capaCOG_LR = new IDEE.layer.GeoTIFF({    
