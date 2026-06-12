@@ -202,12 +202,18 @@ legend: 'CCAA Navarra',
 visibility: true
 });
 
-CCAA.setStyle(new IDEE.style.Generic({
+CCAA_LR.setStyle(new IDEE.style.Generic({
 polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
 }));
 
-CCAA.setZIndex(20);
-mapa.addLayers(CCAA);
+CCAA_NA.setStyle(new IDEE.style.Generic({
+polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
+}));
+
+CCAA_LR.setZIndex(20);
+CCAA_NA.setZIndex(20);
+mapa.addLayers(CCAA_LR);
+mapa.addLayers(CCAA_NA);
 
 
 
