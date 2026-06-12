@@ -182,8 +182,8 @@ Servicio regional del IGN en La Rioja y Navarra
 <script>
 const mapa = IDEE.map({
 container: 'mapa',
-zoom: 9.5,
-minZoom: 9.5,
+zoom: 9,
+minZoom: 9,
 center: [-273000, 5220000], 
 controls: ['scaleline', 'location', 'rotate']
 });
@@ -203,11 +203,11 @@ visibility: true
 });
 
 CCAA_LR.setStyle(new IDEE.style.Generic({
-polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
+polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
 }));
 
 CCAA_NA.setStyle(new IDEE.style.Generic({
-polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: '#FF0000', width: 3 } }
+polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
 }));
 
 CCAA_LR.setZIndex(20);
@@ -255,7 +255,7 @@ precision: 4,
 
 mapa.addPlugin(new IDEE.plugin.Layerswitcher({ 
 collapsed: !0, 
-position: "TR", 
+position: "BL", 
 collapsible: !0, 
 isDraggable: !1, 
 modeSelectLayers: "eyes", 
