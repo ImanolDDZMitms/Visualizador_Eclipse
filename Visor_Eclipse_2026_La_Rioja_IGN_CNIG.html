@@ -144,19 +144,17 @@ display: block;
 transform: scale(1.1);
 }
 
-.button-overlay {
-position: absolute;
-top: 14px;
-left: 14px;
+.header-buttons {
 display: flex;
 flex-direction: column;
-gap: 10px;
-z-index: 1100;
+align-items: center;
+gap: 8px;
 }
 
-.button-overlay a {
-width: 48px;
-height: 48px;
+.btn-info-pdf,
+.btn-alert-png {
+width: 42px;
+height: 42px;
 border-radius: 50%;
 background: #fff;
 box-shadow: 0 4px 14px rgba(0,0,0,0.28);
@@ -167,7 +165,8 @@ justify-content: center;
 text-decoration: none;
 }
 
-.button-overlay img {
+.btn-info-pdf img,
+.btn-alert-png img {
 width: 100%;
 height: 100%;
 object-fit: cover;
@@ -176,55 +175,51 @@ display: block;
 
 @media (max-width: 900px) {
 #cabecera-ign {
-padding: 12px 14px;
-gap: 14px;
+padding: 10px 12px;
+gap: 12px;
 }
 .logo1 {
-height: 80px;
+height: 70px;
 }
 .logo2 {
-height: 42px;
+height: 40px;
 }
 .titulo-ign {
 font-size: 14px;
-padding: 6px 12px;
+padding: 6px 10px;
 }
-.button-overlay {
-top: 12px;
-left: 12px;
-}
-.button-overlay a {
-width: 44px;
-height: 44px;
+.btn-info-pdf,
+.btn-alert-png {
+width: 40px;
+height: 40px;
 }
 }
 
 @media (max-width: 600px) {
 #cabecera-ign {
 justify-content: center;
-align-items: flex-start;
+align-items: center;
 }
 .columna-izquierda,
 .contenedor-ign-lateral {
-width: 100%;
-align-items: flex-start;
+width: auto;
+align-items: center;
 }
 .logo1 {
-height: 68px;
+height: 60px;
 }
 .logo2 {
-height: 36px;
+height: 34px;
 }
 .titulo-ign {
 font-size: 12px;
 padding: 5px 10px;
 white-space: normal;
 }
-#btn-pdf-info {
-width: 40px;
-height: 40px;
-top: 10px;
-left: 10px;
+.btn-info-pdf,
+.btn-alert-png {
+width: 36px;
+height: 36px;
 }
 }
 
@@ -245,11 +240,7 @@ left: 10px;
     <img src="/source/Imagen_IGN.png" alt="Logo IGN" class="logo2">
     <div class="titulo-ign"> Servicio regional del IGN en La Rioja y Navarra </div>
     </div>
-</header>
-<!-- ===== CONTENEDOR MAPA ===== -->
-<div class="map-wrapper">
-  <div id="mapa" class="m-container"></div>
-  <div class="button-overlay">
+  <div class="header-buttons">
     <a href="/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Información PDF">
       <img src="/source/INFO.png" alt="Info">
     </a>
@@ -257,6 +248,10 @@ left: 10px;
       <img src="/source/ATENCIÓN.png" alt="Atención">
     </a>
   </div>
+</header>
+<!-- ===== CONTENEDOR MAPA ===== -->
+<div class="map-wrapper">
+  <div id="mapa" class="m-container"></div>
 </div>
 
 
