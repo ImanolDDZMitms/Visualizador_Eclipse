@@ -36,19 +36,19 @@ width: 100%;
 height: 100%;
 }
 
-/* ===== CABECERA IGN AJUSTADA A LA IZQUIERDA ===== */
+/* ===== CABECERA IGN PROPORCIONAL ===== */
 #cabecera-ign {
 position: relative;
 width: 100%;
-z-index: 1000;
+z-index: 100;
 display: flex;
-flex-wrap: wrap;
+flex-direction: column;
 justify-content: center;
 align-items: center;
 padding: 14px 18px;
 box-sizing: border-box;
 pointer-events: none;
-gap: 18px; /* Espacio entre el bloque Delegación e IGN */
+gap: 12px;
 background: #364b5f;
 color: #fff;
 text-align: center;
@@ -63,98 +63,63 @@ bottom: 0;
 height: 3px;
 background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0.3), rgba(255,255,255,0.95));
 }
-.columna-izquierda,
-.contenedor-ign-lateral {
+#cabecera-ign > * {
+pointer-events: auto;
+}
+
+/* BLOQUE 1: Logos arriba */
+.header-logos {
+display: flex;
 justify-content: center;
 align-items: center;
-text-align: center;
-}
-#cabecera-ign > * {
-pointer-events: auto;
-}
-
-#cabecera-ign > * {
-pointer-events: auto;
+gap: 20px;
+flex-wrap: wrap;
+width: 100%;
 }
 
-/* Contenedor Izquierdo: Logo Delegación + Botón PDF */
-.columna-izquierda {
+/* BLOQUE 2: Botones y Texto abajo */
+.header-bottom {
 display: flex;
-flex-direction: column;
+justify-content: center;
 align-items: center;
-gap: 10px;
-}
-
-/* Contenedor central (ahora lateral): Logo IGN y Texto */
-.contenedor-ign-lateral {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 5px;
-margin-top: 5px;
+gap: 12px;
+flex-wrap: wrap;
+width: 100%;
 }
 
 .logo1 {
-height: 95px; 
+height: 85px; 
 width: auto;
 filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .logo2 {
-height: 55px; 
+height: 50px; 
 width: auto;
 filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
 .titulo-ign {
 background-color: rgba(255, 255, 255, 0.95);
-padding: 8px 15px;
+padding: 8px 14px;
 border-radius: 4px;
-font-size: 16px;
+font-size: 15px;
 font-weight: bold;
 color: #333;
 box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 text-align: center;
 font-family: Arial, sans-serif;
-white-space: nowrap; /* Evita que el texto se parta si hay espacio */
+white-space: nowrap;
+flex: 1;
+min-width: 200px;
+max-width: 400px;
 }
 
-/* ===== BOTÓN PDF INFO ===== */
-.btn-info-pdf {
-display: block;
-width: 42px; 
-height: 42px;
-box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-cursor: pointer;
-transition: transform 0.2s;
-text-decoration: none;
-border-radius: 50%; 
-overflow: hidden; 
-}
-
-.btn-info-pdf img {
-width: 100%;
-height: 100%;
-object-fit: cover; 
-display: block;
-}
-
-.btn-info-pdf:hover,
-.btn-alert-png:hover {
-transform: scale(1.1);
-}
-
-.header-buttons {
-display: flex;
-flex-direction: column;
-align-items: center;
-gap: 8px;
-}
-
+/* ===== BOTONES INFO Y ATENCIÓN ===== */
 .btn-info-pdf,
 .btn-alert-png {
-width: 42px;
-height: 42px;
+width: 40px;
+height: 40px;
 border-radius: 50%;
 background: #fff;
 box-shadow: 0 4px 14px rgba(0,0,0,0.28);
@@ -163,6 +128,14 @@ display: flex;
 align-items: center;
 justify-content: center;
 text-decoration: none;
+cursor: pointer;
+transition: transform 0.2s;
+flex-shrink: 0;
+}
+
+.btn-info-pdf:hover,
+.btn-alert-png:hover {
+transform: scale(1.1);
 }
 
 .btn-info-pdf img,
@@ -173,53 +146,97 @@ object-fit: cover;
 display: block;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
 #cabecera-ign {
 padding: 10px 12px;
-gap: 12px;
+gap: 10px;
+}
+.header-logos {
+gap: 16px;
+}
+.header-bottom {
+gap: 10px;
 }
 .logo1 {
 height: 70px;
 }
 .logo2 {
-height: 40px;
+height: 42px;
 }
 .titulo-ign {
-font-size: 14px;
-padding: 6px 10px;
+font-size: 13px;
+padding: 6px 12px;
+min-width: 160px;
+max-width: 300px;
 }
 .btn-info-pdf,
 .btn-alert-png {
-width: 40px;
-height: 40px;
+width: 38px;
+height: 38px;
 }
 }
 
 @media (max-width: 600px) {
 #cabecera-ign {
-justify-content: center;
-align-items: center;
+padding: 8px 10px;
+gap: 8px;
 }
-.columna-izquierda,
-.contenedor-ign-lateral {
-width: auto;
-align-items: center;
+.header-logos {
+gap: 12px;
+}
+.header-bottom {
+gap: 8px;
 }
 .logo1 {
-height: 60px;
+height: 55px;
 }
 .logo2 {
 height: 34px;
 }
 .titulo-ign {
-font-size: 12px;
+font-size: 11px;
 padding: 5px 10px;
+min-width: 140px;
+max-width: 250px;
 white-space: normal;
+line-height: 1.2;
 }
 .btn-info-pdf,
 .btn-alert-png {
-width: 36px;
-height: 36px;
+width: 34px;
+height: 34px;
+}
+}
+
+@media (max-width: 400px) {
+#cabecera-ign {
+padding: 6px 8px;
+gap: 6px;
+}
+.header-logos {
+gap: 10px;
+}
+.header-bottom {
+gap: 6px;
+}
+.logo1 {
+height: 45px;
+}
+.logo2 {
+height: 28px;
+}
+.titulo-ign {
+font-size: 10px;
+padding: 4px 8px;
+min-width: 110px;
+max-width: 180px;
+white-space: normal;
+line-height: 1.1;
+}
+.btn-info-pdf,
+.btn-alert-png {
+width: 30px;
+height: 30px;
 }
 }
 
@@ -229,21 +246,18 @@ height: 36px;
 <body>
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <header id="cabecera-ign">
-
-<!-- Bloque 1: Delegación -->
-    <div class="columna-izquierda">
+  <!-- BLOQUE 1: Logos -->
+  <div class="header-logos">
     <img src="/source/Imagen_Dele.png" alt="Logo Delegación" class="logo1">
-    </div>
-
-<!-- Bloque 2: IGN (Logo + Texto) al lado de la Delegación -->
-    <div class="contenedor-ign-lateral">
     <img src="/source/Imagen_IGN.png" alt="Logo IGN" class="logo2">
-    <div class="titulo-ign"> Servicio regional del IGN en La Rioja y Navarra </div>
-    </div>
-  <div class="header-buttons">
+  </div>
+
+  <!-- BLOQUE 2: Botón INFO + Texto + Botón ATENCIÓN -->
+  <div class="header-bottom">
     <a href="/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Información PDF">
       <img src="/source/INFO.png" alt="Info">
     </a>
+    <div class="titulo-ign">Servicio regional del IGN en La Rioja y Navarra</div>
     <a href="/source/advertencia_importante.png" target="_blank" class="btn-alert-png" title="Advertencia importante">
       <img src="/source/ATENCIÓN.png" alt="Atención">
     </a>
@@ -372,6 +386,8 @@ function toggleHeaderVisibility() {
   if (!layerswitcherPanel) return;
   const isOpened = layerswitcherPanel.classList.contains('opened');
   header.style.display = isOpened ? 'none' : 'flex';
+  header.style.visibility = isOpened ? 'hidden' : 'visible';
+  header.style.pointerEvents = isOpened ? 'none' : 'auto';
 }
 
 const observer = new MutationObserver(toggleHeaderVisibility);
@@ -380,6 +396,8 @@ if (panel) {
   observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
 }
 
-window.addEventListener('load', toggleHeaderVisibility);
+window.addEventListener('load', function() {
+  setTimeout(toggleHeaderVisibility, 100);
+});
 </script>
 </body>
