@@ -173,6 +173,20 @@ object-fit: cover;
 display: block;
 }
 
+#center-dot {
+position: absolute;
+top: 50%;
+left: 50%;
+width: 6px;
+height: 6px;
+background: #364b5f;
+border-radius: 50%;
+transform: translate(-50%, -50%);
+z-index: 1001;
+display: none;
+pointer-events: none;
+}
+
 @media (max-width: 900px) {
 #cabecera-ign {
 padding: 10px 12px;
@@ -252,6 +266,7 @@ height: 36px;
 <!-- ===== CONTENEDOR MAPA ===== -->
 <div class="map-wrapper">
   <div id="mapa" class="m-container"></div>
+  <div id="center-dot"></div>
 </div>
 
 
@@ -364,6 +379,50 @@ http: !0,
 showCatalog: !1 
 });
 mapa.addPlugin(layerSwitcher);
+
+const centerDot = document.getElementById('center-dot');
+function showCenterDot() {
+  if (centerDot) {
+    centerDot.style.display = 'block';
+  }
+}
+function hideCenterDot() {
+  if (centerDot) {
+    centerDot.style.display = 'none';
+  }
+}
+
+function attachLocationControlListener() {
+  document.addEventListener('click', function (event) {
+    const target = event.target.closest('button, a, div, span');
+    if (!target) return;
+    const title = (target.getAttribute('title') || '').toLowerCase();
+    const ariaLabel = (target.getAttribute('aria-label') || '').toLowerCase();
+    const className = (target.className || '').toString().toLowerCase();
+    if (title.includes('location') || title.includes('localiz') || ariaLabel.includes('location') || ariaLabel.includes('localiz') || className.includes('location')) {
+      showCenterDot();
+    }
+  });
+}
+
+function attachMapMoveHandlers() {
+  if (typeof mapa.on === 'function') {
+    mapa.on('moveend', hideCenterDot);
+    mapa.on('pointerdrag', hideCenterDot);
+  } else if (mapa.getImpl && typeof mapa.getImpl === 'function') {
+    const impl = mapa.getImpl();
+    if (impl && typeof impl.getMap === 'function') {
+      const olMap = impl.getMap();
+      if (olMap && typeof olMap.on === 'function') {
+        olMap.on('moveend', hideCenterDot);
+        olMap.on('pointerdrag', hideCenterDot);
+      }
+    }
+  }
+}
+
+attachLocationControlListener();
+attachMapMoveHandlers();
 
 function toggleHeaderVisibility() {
   const header = document.getElementById('cabecera-ign');
