@@ -43,7 +43,7 @@ width: 100%;
 z-index: 1000;
 display: flex;
 flex-wrap: wrap;
-justify-content: flex-start; /* Alineado a la izquierda */
+justify-content: center;
 align-items: center;
 padding: 14px 18px;
 box-sizing: border-box;
@@ -51,6 +51,7 @@ pointer-events: none;
 gap: 18px; /* Espacio entre el bloque Delegación e IGN */
 background: #364b5f;
 color: #fff;
+text-align: center;
 overflow: hidden;
 }
 #cabecera-ign::after {
@@ -61,6 +62,15 @@ right: 0;
 bottom: 0;
 height: 3px;
 background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0.3), rgba(255,255,255,0.95));
+}
+.columna-izquierda,
+.contenedor-ign-lateral {
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+#cabecera-ign > * {
+pointer-events: auto;
 }
 
 #cabecera-ign > * {
@@ -331,7 +341,7 @@ label: 'WGS84 (lat, lon)',
 precision: 4,
 }));
 
-mapa.addPlugin(new IDEE.plugin.Layerswitcher({ 
+const layerSwitcher = new IDEE.plugin.Layerswitcher({ 
 collapsed: !0, 
 position: "BL", 
 collapsible: !0, 
@@ -342,6 +352,24 @@ isMoveLayers: !0,
 https: !0, 
 http: !0, 
 showCatalog: !1 
-}));
+});
+mapa.addPlugin(layerSwitcher);
+
+function toggleHeaderVisibility() {
+  const header = document.getElementById('cabecera-ign');
+  if (!header) return;
+  const layerswitcherPanel = document.querySelector('.m-plugin-layerswitcher');
+  if (!layerswitcherPanel) return;
+  const isOpened = layerswitcherPanel.classList.contains('opened');
+  header.style.display = isOpened ? 'none' : 'flex';
+}
+
+const observer = new MutationObserver(toggleHeaderVisibility);
+const panel = document.querySelector('.m-plugin-layerswitcher');
+if (panel) {
+  observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
+}
+
+window.addEventListener('load', toggleHeaderVisibility);
 </script>
 </body>
