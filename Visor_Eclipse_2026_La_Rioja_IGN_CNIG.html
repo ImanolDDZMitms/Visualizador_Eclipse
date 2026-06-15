@@ -26,10 +26,14 @@ overflow: hidden;
 display: flex;
 flex-direction: column;
 }
-#mapa {
+.map-wrapper {
+position: relative;
 width: 100%;
 flex: 1;
-position: relative;
+}
+#mapa {
+width: 100%;
+height: 100%;
 }
 
 /* ===== CABECERA IGN AJUSTADA A LA IZQUIERDA ===== */
@@ -38,12 +42,25 @@ position: relative;
 width: 100%;
 z-index: 1000;
 display: flex;
+flex-wrap: wrap;
 justify-content: flex-start; /* Alineado a la izquierda */
-align-items: flex-start;
-padding: 10px 15px;
+align-items: center;
+padding: 14px 18px;
 box-sizing: border-box;
 pointer-events: none;
-gap: 20px; /* Espacio entre el bloque Delegación e IGN */
+gap: 18px; /* Espacio entre el bloque Delegación e IGN */
+background: #364b5f;
+color: #fff;
+overflow: hidden;
+}
+#cabecera-ign::after {
+content: "";
+position: absolute;
+left: 0;
+right: 0;
+bottom: 0;
+height: 3px;
+background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0.3), rgba(255,255,255,0.95));
 }
 
 #cabecera-ign > * {
@@ -116,6 +133,81 @@ display: block;
 transform: scale(1.1);
 }
 
+#btn-pdf-info {
+position: absolute;
+top: 14px;
+left: 14px;
+width: 48px;
+height: 48px;
+border-radius: 50%;
+background: #fff;
+box-shadow: 0 4px 14px rgba(0,0,0,0.28);
+overflow: hidden;
+display: flex;
+align-items: center;
+justify-content: center;
+z-index: 1100;
+}
+
+#btn-pdf-info img {
+width: 100%;
+height: 100%;
+object-fit: cover;
+display: block;
+}
+
+@media (max-width: 900px) {
+#cabecera-ign {
+padding: 12px 14px;
+gap: 14px;
+}
+.logo1 {
+height: 80px;
+}
+.logo2 {
+height: 42px;
+}
+.titulo-ign {
+font-size: 14px;
+padding: 6px 12px;
+}
+#btn-pdf-info {
+width: 44px;
+height: 44px;
+top: 12px;
+left: 12px;
+}
+}
+
+@media (max-width: 600px) {
+#cabecera-ign {
+justify-content: center;
+align-items: flex-start;
+}
+.columna-izquierda,
+.contenedor-ign-lateral {
+width: 100%;
+align-items: flex-start;
+}
+.logo1 {
+height: 68px;
+}
+.logo2 {
+height: 36px;
+}
+.titulo-ign {
+font-size: 12px;
+padding: 5px 10px;
+white-space: normal;
+}
+#btn-pdf-info {
+width: 40px;
+height: 40px;
+top: 10px;
+left: 10px;
+}
+}
+
 </style>
 </head>
 
@@ -123,12 +215,9 @@ transform: scale(1.1);
 <!-- ===== CABECERA INSTITUCIONAL ===== -->
 <header id="cabecera-ign">
 
-<!-- Bloque 1: Delegación y PDF -->
+<!-- Bloque 1: Delegación -->
     <div class="columna-izquierda">
     <img src="/source/Imagen_Dele.png" alt="Logo Delegación" class="logo1">
-    <a href="/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Información PDF"> 
-        <img src="/source/INFO.png" alt="Info">
-    </a>
     </div>
 
 <!-- Bloque 2: IGN (Logo + Texto) al lado de la Delegación -->
@@ -138,7 +227,12 @@ transform: scale(1.1);
     </div>
 </header>
 <!-- ===== CONTENEDOR MAPA ===== -->
-<div id="mapa" class="m-container"></div>
+<div class="map-wrapper">
+  <div id="mapa" class="m-container"></div>
+  <a href="/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" id="btn-pdf-info" title="Información PDF">
+    <img src="/source/INFO.png" alt="Info">
+  </a>
+</div>
 
 
 
