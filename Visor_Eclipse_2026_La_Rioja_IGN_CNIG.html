@@ -139,14 +139,22 @@ object-fit: cover;
 display: block;
 }
 
-.btn-info-pdf:hover {
+.btn-info-pdf:hover,
+.btn-alert-png:hover {
 transform: scale(1.1);
 }
 
-#btn-pdf-info {
+.button-overlay {
 position: absolute;
 top: 14px;
 left: 14px;
+display: flex;
+flex-direction: column;
+gap: 10px;
+z-index: 1100;
+}
+
+.button-overlay a {
 width: 48px;
 height: 48px;
 border-radius: 50%;
@@ -156,10 +164,10 @@ overflow: hidden;
 display: flex;
 align-items: center;
 justify-content: center;
-z-index: 1100;
+text-decoration: none;
 }
 
-#btn-pdf-info img {
+.button-overlay img {
 width: 100%;
 height: 100%;
 object-fit: cover;
@@ -181,11 +189,13 @@ height: 42px;
 font-size: 14px;
 padding: 6px 12px;
 }
-#btn-pdf-info {
-width: 44px;
-height: 44px;
+.button-overlay {
 top: 12px;
 left: 12px;
+}
+.button-overlay a {
+width: 44px;
+height: 44px;
 }
 }
 
@@ -239,9 +249,14 @@ left: 10px;
 <!-- ===== CONTENEDOR MAPA ===== -->
 <div class="map-wrapper">
   <div id="mapa" class="m-container"></div>
-  <a href="/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" id="btn-pdf-info" title="Información PDF">
-    <img src="/source/INFO.png" alt="Info">
-  </a>
+  <div class="button-overlay">
+    <a href="/source/Visivilidad_Sol_ECLIPSE_2026.pdf" target="_blank" class="btn-info-pdf" title="Información PDF">
+      <img src="/source/INFO.png" alt="Info">
+    </a>
+    <a href="/source/advertencia_importante.png" target="_blank" class="btn-alert-png" title="Advertencia importante">
+      <img src="/source/ATENCIÓN.png" alt="Atención">
+    </a>
+  </div>
 </div>
 
 
