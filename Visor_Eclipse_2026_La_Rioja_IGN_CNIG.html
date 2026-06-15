@@ -218,7 +218,7 @@ polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: 'orange', width:
 }));
 
 UMBRA.setStyle(new IDEE.style.Generic({
-polygon: { fill: { color: 'gray', opacity: 0.4 }, stroke: { color: 'white', width: 1 } }
+polygon: { fill: { color: 'gray', opacity: 0.3 }, stroke: { color: 'white', width: 0.5 } }
 }));
 
 CCAA_LR.setZIndex(20);
@@ -246,17 +246,18 @@ capaCOG_NA.setZIndex(10);
 mapa.addLayers(capaCOG_NA);
 
 
-const ORTO_MA = new IDEE.layer.WMS({
-url: 'https://www.ign.es/wms-inspire/pnoa-ma?',
-name: 'OI.OrthoimageCoverage',
-legend: 'Ortofoto PNOA máxima actualidad',
-maxZoom: 20,
-minZoom: 6,
-visibility: true,
-tiled: false
-}, { visibility: true, opacity: 1 });
+const ORTO_MA = new IDEE.layer.WMTS({
+url: "http://www.ign.es/wmts/pnoa-ma",
+name: "OI.OrthoimageCoverage",
+matrixSet: "EPSG:25830",
+legend: "Ortofoto PNOA máxima actualidad"
+},
+{
+  format: 'image/png'
+});
 ORTO_MA.setZIndex(1);
-mapa.addLayers(ORTO_MA);
+mapa.addWMTS(ORTO_MA);
+
 
 mapa.addPlugin(new IDEE.plugin.MouseSRS({
 position: 'BL',
