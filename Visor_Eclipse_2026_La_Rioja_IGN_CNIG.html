@@ -509,19 +509,19 @@ legend: 'Sombra Navarra ECLIPSE 2026',
 capaCOG_NA.setZIndex(10);
 mapa.addLayers(capaCOG_NA);
 
-
-const ORTO_MA = new IDEE.layer.WMTS({
-url: "https://www.ign.es/wmts/pnoa-ma",
-name: "OI.OrthoimageCoverage",
-matrixSet: "EPSG:25830",
-legend: "Ortofoto PNOA máxima actualidad",
-visibility: true
-},
-{
-  format: 'image/png'
-});
-ORTO_MA.setZIndex(1);
-mapa.addLayers(ORTO_MA);
+// ===== wmts =====
+//const ORTO_MA = new IDEE.layer.WMTS({
+//url: "https://www.ign.es/wmts/pnoa-ma",
+//name: "OI.OrthoimageCoverage",
+//matrixSet: "EPSG:25830",
+//legend: "Ortofoto PNOA máxima actualidad",
+//visibility: true
+//},
+//{
+//  format: 'image/png'
+//});
+//ORTO_MA.setZIndex(1);
+//mapa.addLayers(ORTO_MA);
 
 
 mapa.addPlugin(new IDEE.plugin.MouseSRS({
