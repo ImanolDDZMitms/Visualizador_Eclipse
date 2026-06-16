@@ -67,12 +67,6 @@ background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0
 pointer-events: auto;
 }
 
-@media (max-height: 50vw) {
-#cabecera-ign {
-height: 150px;
-padding: 10px 12px;
-}
-}
 
 /* BLOQUE 1: Logos arriba */
 .header-logos {
@@ -124,150 +118,6 @@ min-width: 200px;
 max-width: 400px;
 }
 
-@media (max-width: 800px) {
-#cabecera-ign {
-padding: 12px 14px;
-gap: 10px;
-}
-.header-logos {
-gap: 18px;
-}
-.header-bottom {
-gap: 10px;
-}
-.logo1 {
-height: 78px;
-}
-.logo2 {
-height: 46px;
-}
-.titulo-ign {
-font-size: 14px;
-min-width: 180px;
-max-width: 360px;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 38px;
-height: 38px;
-}
-}
-
-@media (max-width: 700px) {
-#cabecera-ign {
-padding: 11px 13px;
-}
-.header-logos {
-gap: 16px;
-}
-.header-bottom {
-gap: 10px;
-}
-.logo1 {
-height: 74px;
-}
-.logo2 {
-height: 44px;
-}
-.titulo-ign {
-font-size: 13px;
-min-width: 170px;
-max-width: 320px;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 37px;
-height: 37px;
-}
-}
-
-@media (max-width: 600px) {
-#cabecera-ign {
-padding: 10px 12px;
-}
-.header-logos {
-gap: 14px;
-}
-.header-bottom {
-gap: 8px;
-}
-.logo1 {
-height: 68px;
-}
-.logo2 {
-height: 38px;
-}
-.titulo-ign {
-font-size: 12px;
-min-width: 150px;
-max-width: 280px;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 36px;
-height: 36px;
-}
-}
-
-@media (max-width: 500px) {
-#cabecera-ign {
-padding: 9px 11px;
-}
-.header-logos {
-gap: 12px;
-}
-.header-bottom {
-gap: 8px;
-}
-.logo1 {
-height: 60px;
-}
-.logo2 {
-height: 36px;
-}
-.titulo-ign {
-font-size: 11px;
-min-width: 140px;
-max-width: 240px;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 34px;
-height: 34px;
-}
-}
-
-@media (max-width: 400px) {
-#cabecera-ign {
-padding: 6px 8px;
-gap: 6px;
-}
-.header-logos {
-gap: 10px;
-}
-.header-bottom {
-gap: 6px;
-}
-.logo1 {
-height: 45px;
-}
-.logo2 {
-height: 28px;
-}
-.titulo-ign {
-font-size: 10px;
-padding: 4px 8px;
-min-width: 110px;
-max-width: 180px;
-white-space: normal;
-line-height: 1.1;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 30px;
-height: 30px;
-}
-}
 
 /* ===== BOTONES INFO Y ATENCIÓN ===== */
 .btn-info-pdf,
@@ -300,99 +150,229 @@ object-fit: cover;
 display: block;
 }
 
-@media (max-width: 768px) {
+/* Valores base (estos serían los estilos para pantallas > 800px, por ejemplo) */
 #cabecera-ign {
-padding: 10px 12px;
-gap: 10px;
+    padding: 2.0vw 2.5vw; /* Equivalente a ~20px 25px en una pantalla grande */
+    gap: 2.0vw;
+    display: flex; /* Asegura que Flexbox funcione */
+    align-items: center; /* Centra verticalmente los elementos */
+    justify-content: space-between; /* O como necesites */
+    background-color: #f0f0f0; /* Ejemplo */
 }
 .header-logos {
-gap: 16px;
+    display: flex;
+    align-items: center;
+    gap: 3.0vw;
 }
 .header-bottom {
-gap: 10px;
+    display: flex;
+    align-items: center;
+    gap: 2.0vw;
 }
 .logo1 {
-height: 70px;
+    height: 7.5vh; /* Aproximadamente 80px en un viewport de 1000px de altura */
 }
 .logo2 {
-height: 42px;
+    height: 4.5vh; /* Aproximadamente 48px */
 }
 .titulo-ign {
-font-size: 13px;
-padding: 6px 12px;
-min-width: 160px;
-max-width: 300px;
+    font-size: 1.5vw; /* Aproximadamente 16px */
+    padding: 0.8vw 1.5vw;
+    min-width: 18vw;
+    max-width: 35vw;
+    white-space: nowrap; /* Por defecto */
+    line-height: 1.3;
+    background-color: #e0e0e0; /* Ejemplo */
+    border-radius: 5px;
 }
 .btn-info-pdf,
 .btn-alert-png {
-width: 38px;
-height: 38px;
-}
+    width: 4.5vw;
+    height: 4.5vw;
+    min-width: 45px; /* Evita que se hagan demasiado pequeños */
+    min-height: 45px;
+    background-color: #007bff; /* Ejemplo */
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
+/* Media Query para max-width: 800px */
+@media (max-width: 800px) {
+    #cabecera-ign {
+        padding: 1.5vw 1.8vw; /* Un poco más pequeño */
+        gap: 1.5vw;
+    }
+    .header-logos {
+        gap: 2.5vw;
+    }
+    .header-bottom {
+        gap: 1.5vw;
+    }
+    .logo1 {
+        height: 7vh; /* Ligeramente más pequeño */
+    }
+    .logo2 {
+        height: 4vh;
+    }
+    .titulo-ign {
+        font-size: 1.4vw;
+        padding: 0.7vw 1.4vw;
+        min-width: 17vw;
+        max-width: 32vw;
+    }
+    .btn-info-pdf,
+    .btn-alert-png {
+        width: 4.2vw;
+        height: 4.2vw;
+        min-width: 42px;
+        min-height: 42px;
+    }
+}
+
+/* Media Query para max-width: 700px */
+@media (max-width: 700px) {
+    #cabecera-ign {
+        padding: 1.2vw 1.5vw;
+        gap: 1.2vw;
+    }
+    .header-logos {
+        gap: 2.2vw;
+    }
+    .header-bottom {
+        gap: 1.2vw;
+    }
+    .logo1 {
+        height: 6.5vh;
+    }
+    .logo2 {
+        height: 3.8vh;
+    }
+    .titulo-ign {
+        font-size: 1.3vw;
+        padding: 0.6vw 1.3vw;
+        min-width: 16vw;
+        max-width: 30vw;
+    }
+    .btn-info-pdf,
+    .btn-alert-png {
+        width: 4vw;
+        height: 4vw;
+        min-width: 40px;
+        min-height: 40px;
+    }
+}
+
+/* Media Query para max-width: 600px */
+/* Basado en tu ejemplo original de 600px */
 @media (max-width: 600px) {
-#cabecera-ign {
-padding: 8px 10px;
-gap: 8px;
-}
-.header-logos {
-gap: 12px;
-}
-.header-bottom {
-gap: 8px;
-}
-.logo1 {
-height: 55px;
-}
-.logo2 {
-height: 34px;
-}
-.titulo-ign {
-font-size: 11px;
-padding: 5px 10px;
-min-width: 140px;
-max-width: 250px;
-white-space: normal;
-line-height: 1.2;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 34px;
-height: 34px;
-}
+    #cabecera-ign {
+        padding: 1.3vw 1.7vw; /* Ajustado para ser más responsivo, antes 8px 10px */
+        gap: 1.3vw; /* Antes 8px */
+    }
+    .header-logos {
+        gap: 2vw; /* Antes 12px */
+    }
+    .header-bottom {
+        gap: 1.3vw; /* Antes 8px */
+    }
+    .logo1 {
+        height: 6.0vh; /* Antes 55px */
+    }
+    .logo2 {
+        height: 3.5vh; /* Antes 34px */
+    }
+    .titulo-ign {
+        font-size: 1.8vw; /* Ajustado para que sea legible, antes 11px */
+        padding: 0.8vw 1.7vw; /* Antes 5px 10px */
+        min-width: 23vw; /* Antes 140px */
+        max-width: 42vw; /* Antes 250px */
+        white-space: normal;
+        line-height: 1.2;
+    }
+    .btn-info-pdf,
+    .btn-alert-png {
+        width: 6vw; /* Antes 36px */
+        height: 6vw; /* Antes 36px */
+        min-width: 36px; /* Mantener un mínimo */
+        min-height: 36px;
+    }
 }
 
+/* Media Query para max-width: 500px */
+@media (max-width: 500px) {
+    #cabecera-ign {
+        padding: 1.1vw 1.4vw;
+        gap: 1.1vw;
+    }
+    .header-logos {
+        gap: 1.8vw;
+    }
+    .header-bottom {
+        gap: 1.1vw;
+    }
+    .logo1 {
+        height: 5.5vh;
+    }
+    .logo2 {
+        height: 3.2vh;
+    }
+    .titulo-ign {
+        font-size: 1.9vw;
+        padding: 0.7vw 1.4vw;
+        min-width: 25vw;
+        max-width: 45vw;
+        white-space: normal;
+        line-height: 1.2;
+    }
+    .btn-info-pdf,
+    .btn-alert-png {
+        width: 6.5vw;
+        height: 6.5vw;
+        min-width: 34px;
+        min-height: 34px;
+    }
+}
+
+/* Media Query para max-width: 400px */
+/* Basado en tu ejemplo original de 400px */
 @media (max-width: 400px) {
-#cabecera-ign {
-padding: 6px 8px;
-gap: 6px;
+    #cabecera-ign {
+        padding: 1.5vw 2vw; /* Ajustado para ser más responsivo, antes 6px 8px */
+        gap: 1.5vw; /* Antes 6px */
+    }
+    .header-logos {
+        gap: 5vw; /* Antes 20px */
+    }
+    .header-bottom {
+        gap: 3.75vw; /* Antes 15px */
+    }
+    .logo1 {
+        height: 5.0vh; /* Antes 45px */
+    }
+    .logo2 {
+        height: 2.8vh; /* Antes 28px */
+    }
+    .titulo-ign {
+        font-size: 2.2vw; /* Ajustado para que sea legible, antes 10px */
+        padding: 1vw 2vw; /* Antes 4px 8px */
+        min-width: 27.5vw; /* Antes 110px */
+        max-width: 45vw; /* Antes 180px */
+        white-space: normal;
+        line-height: 1.1;
+    }
+    .btn-info-pdf,
+    .btn-alert-png {
+        width: 8vw; /* Antes 32px */
+        height: 8vw; /* Antes 32px */
+        min-width: 32px;
+        min-height: 32px;
+    }
 }
-.header-logos {
-gap: 20px;
-}
-.header-bottom {
-gap: 15px;
-}
-.logo1 {
-height: 45px;
-}
-.logo2 {
-height: 28px;
-}
-.titulo-ign {
-font-size: 10px;
-padding: 4px 8px;
-min-width: 110px;
-max-width: 180px;
-white-space: normal;
-line-height: 1.1;
-}
-.btn-info-pdf,
-.btn-alert-png {
-width: 30px;
-height: 30px;
-}
-}
+
+
 
 </style>
 </head>
