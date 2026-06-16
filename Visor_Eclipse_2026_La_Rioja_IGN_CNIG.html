@@ -442,28 +442,31 @@ controls: ['location', 'rotate']
 });
 
 const CCAA_LR = new IDEE.layer.GeoJSON({
+interactive: false,
 name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
 url: '/source/LA_RIOJA.geojson',
 legend: 'CCAA La Rioja', 
 }, 
-{ visibility: true, queryable: false, interactive: false}
+{visibility: true, queryable: false}
 );
 
 const CCAA_NA = new IDEE.layer.GeoJSON({
+interactive: false,
 name: "COMUNIDAD AUTÓNOMA DE NAVARRA", 
 url: '/source/NAVARRA.geojson',
 legend: 'CCAA Navarra', 
 }, 
-{ visibility: true, queryable: false, interactive: false}
+{visibility: true, queryable: false}
 );
 
 
 const UMBRA = new IDEE.layer.GeoJSON({
+interactive: false,
 name: "UMBRA", 
 url: '/source/UMBRA.geojson',
 legend: 'UMBRA', 
 }, 
-{ visibility: true, queryable: false, interactive: false}
+{visibility: true, queryable: false}
 );
 
 CCAA_LR.setStyle(new IDEE.style.Generic({
@@ -490,7 +493,7 @@ const capaCOG_LR = new IDEE.layer.GeoTIFF({
 url: '/source/La_Rioja_Sombra_COG_WM.tif',
 name: 'Sombra La Rioja',
 legend: 'Sombra La Rioja ECLIPSE 2026',
-}, { visibility: true, opacity: 0.6 });
+}, {visibility: true, opacity: 0.6 });
 capaCOG_LR.setZIndex(10);
 mapa.addLayers(capaCOG_LR);
 
