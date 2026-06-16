@@ -67,6 +67,13 @@ background: linear-gradient(to right, rgba(255,255,255,0.95), rgba(255,255,255,0
 pointer-events: auto;
 }
 
+@media (max-height: 50vw) {
+#cabecera-ign {
+height: 150px;
+padding: 10px 12px;
+}
+}
+
 /* BLOQUE 1: Logos arriba */
 .header-logos {
 display: flex;
@@ -110,9 +117,156 @@ box-shadow: 0 4px 6px rgba(0,0,0,0.2);
 text-align: center;
 font-family: Arial, sans-serif;
 white-space: nowrap;
+overflow: hidden;
+text-overflow: ellipsis;
 flex: 1;
 min-width: 200px;
 max-width: 400px;
+}
+
+@media (max-width: 800px) {
+#cabecera-ign {
+padding: 12px 14px;
+gap: 10px;
+}
+.header-logos {
+gap: 18px;
+}
+.header-bottom {
+gap: 10px;
+}
+.logo1 {
+height: 78px;
+}
+.logo2 {
+height: 46px;
+}
+.titulo-ign {
+font-size: 14px;
+min-width: 180px;
+max-width: 360px;
+}
+.btn-info-pdf,
+.btn-alert-png {
+width: 38px;
+height: 38px;
+}
+}
+
+@media (max-width: 700px) {
+#cabecera-ign {
+padding: 11px 13px;
+}
+.header-logos {
+gap: 16px;
+}
+.header-bottom {
+gap: 10px;
+}
+.logo1 {
+height: 74px;
+}
+.logo2 {
+height: 44px;
+}
+.titulo-ign {
+font-size: 13px;
+min-width: 170px;
+max-width: 320px;
+}
+.btn-info-pdf,
+.btn-alert-png {
+width: 37px;
+height: 37px;
+}
+}
+
+@media (max-width: 600px) {
+#cabecera-ign {
+padding: 10px 12px;
+}
+.header-logos {
+gap: 14px;
+}
+.header-bottom {
+gap: 8px;
+}
+.logo1 {
+height: 68px;
+}
+.logo2 {
+height: 38px;
+}
+.titulo-ign {
+font-size: 12px;
+min-width: 150px;
+max-width: 280px;
+}
+.btn-info-pdf,
+.btn-alert-png {
+width: 36px;
+height: 36px;
+}
+}
+
+@media (max-width: 500px) {
+#cabecera-ign {
+padding: 9px 11px;
+}
+.header-logos {
+gap: 12px;
+}
+.header-bottom {
+gap: 8px;
+}
+.logo1 {
+height: 60px;
+}
+.logo2 {
+height: 36px;
+}
+.titulo-ign {
+font-size: 11px;
+min-width: 140px;
+max-width: 240px;
+}
+.btn-info-pdf,
+.btn-alert-png {
+width: 34px;
+height: 34px;
+}
+}
+
+@media (max-width: 400px) {
+#cabecera-ign {
+padding: 6px 8px;
+gap: 6px;
+}
+.header-logos {
+gap: 10px;
+}
+.header-bottom {
+gap: 6px;
+}
+.logo1 {
+height: 45px;
+}
+.logo2 {
+height: 28px;
+}
+.titulo-ign {
+font-size: 10px;
+padding: 4px 8px;
+min-width: 110px;
+max-width: 180px;
+white-space: normal;
+line-height: 1.1;
+}
+.btn-info-pdf,
+.btn-alert-png {
+width: 30px;
+height: 30px;
+}
 }
 
 /* ===== BOTONES INFO Y ATENCIÓN ===== */
@@ -291,21 +445,27 @@ const CCAA_LR = new IDEE.layer.GeoJSON({
 name: "COMUNIDAD AUTÓNOMA DE LA RIOJA", 
 url: '/source/LA_RIOJA.geojson',
 legend: 'CCAA La Rioja', 
-visibility: true
+visibility: true,
+queryable: false,
+interactive: false
 });
 
 const CCAA_NA = new IDEE.layer.GeoJSON({
 name: "COMUNIDAD AUTÓNOMA DE NAVARRA", 
 url: '/source/NAVARRA.geojson',
 legend: 'CCAA Navarra', 
-visibility: true
+visibility: true,
+queryable: false,
+interactive: false
 });
 
 const UMBRA = new IDEE.layer.GeoJSON({
 name: "UMBRA", 
 url: '/source/UMBRA.geojson',
 legend: 'Umbria', 
-visibility: true
+visibility: true,
+queryable: false,
+interactive: false
 });
 
 CCAA_LR.setStyle(new IDEE.style.Generic({
@@ -346,16 +506,17 @@ mapa.addLayers(capaCOG_NA);
 
 
 const ORTO_MA = new IDEE.layer.WMTS({
-url: "http://www.ign.es/wmts/pnoa-ma",
+url: "https://www.ign.es/wmts/pnoa-ma",
 name: "OI.OrthoimageCoverage",
 matrixSet: "EPSG:25830",
-legend: "Ortofoto PNOA máxima actualidad"
+legend: "Ortofoto PNOA máxima actualidad",
+visibility: true
 },
 {
   format: 'image/png'
 });
 ORTO_MA.setZIndex(1);
-mapa.addWMTS(ORTO_MA);
+mapa.addLayers(ORTO_MA);
 
 
 mapa.addPlugin(new IDEE.plugin.MouseSRS({
@@ -371,7 +532,7 @@ position: "BL",
 collapsible: !0, 
 isDraggable: !1, 
 modeSelectLayers: "eyes", 
-tools: ["transparency", "legend", "zoom", "information", "style", "delete"], 
+tools: ["transparency", "legend", "zoom", "style", "delete"], 
 isMoveLayers: !0, 
 https: !0, 
 http: !0, 
