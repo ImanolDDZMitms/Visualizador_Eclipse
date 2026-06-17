@@ -242,7 +242,7 @@ height: 32px;
 }
 }
 
-@media (max-height: 200px) {
+@media (max-height: 400px) {
 #cabecera-ign {
 padding: 6px 8px;
 gap: 6px;
