@@ -2,8 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport"
-content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="cnig" content="yes">
 
@@ -39,102 +38,94 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
     </a>
   </div>
 </header>
+
 <!-- ===== CONTENEDOR MAPA ===== -->
 <div class="map-wrapper">
   <div id="mapa" class="m-container"></div>
 </div>
 
-
-
-<!-- ===== JS API‑IDEE (SIN CAMBIOS) ===== -->
+<!-- ===== JS API‑IDEE ===== -->
 <script src="https://componentes.idee.es/api-idee/vendor/browser-polyfill.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
-
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
 <script>
 const mapa = IDEE.map({
-container: 'mapa',
-zoom: 8,
-minZoom: 8,
-center: [-273000, 5220000], 
-controls: ['location', 'rotate'],
+  container: 'mapa',
+  zoom: 8,
+  minZoom: 8,
+  center: [-273000, 5220000], 
+  controls: ['location', 'rotate'],
 });
 
+// ===== CARGA DE CAPAS GEOTIFF (SOMBRAS) =====
 const capaCOG_LR = new IDEE.layer.GeoTIFF({    
-url: '/source/La_Rioja_Sombra_COG_WM.tif',
-name: 'Sombra La Rioja',
-legend: 'Sombra La Rioja ECLIPSE 2026',
+  url: '/source/La_Rioja_Sombra_COG_WM.tif',
+  name: 'Sombra La Rioja',
+  legend: 'Sombra La Rioja ECLIPSE 2026',
 }, {visibility: true, opacity: 0.6 });
 capaCOG_LR.setZIndex(10);
 mapa.addLayers(capaCOG_LR);
 
 const capaCOG_NA = new IDEE.layer.GeoTIFF({    
-url: '/source/Navarra_Sombra_COG_WM.tif',
-name: 'Sombra Navarra',
-legend: 'Sombra Navarra ECLIPSE 2026',
+  url: '/source/Navarra_Sombra_COG_WM.tif',
+  name: 'Sombra Navarra',
+  legend: 'Sombra Navarra ECLIPSE 2026',
 }, { visibility: true, opacity: 0.6 });
 capaCOG_NA.setZIndex(10);
 mapa.addLayers(capaCOG_NA);
 
+
+// ===== CARGA DE CAPAS GEOJSON =====
 const CCAA_LR = new IDEE.layer.GeoJSON({
   name: "Comunidad Autónoma de La Rioja", 
   url: '/source/LA_RIOJA.geojson',
-  legend: 'Comunidad Autónoma de La Rioja'
+  legend: 'Comunidad Autónoma de La Rioja',
+  info: false,
+  popup: false
 }, { visibility: true });
 
 const CCAA_NA = new IDEE.layer.GeoJSON({
   name: "Comunidad Foral de Navarra", 
   url: '/source/NAVARRA.geojson',
-  legend: 'Comunidad Foral de Navarra'
+  legend: 'Comunidad Foral de Navarra',
+  info: false,
+  popup: false
 }, { visibility: true });
 
 const UMBRA = new IDEE.layer.GeoJSON({
   name: "Franja de totalidad", 
   url: '/source/UMBRA.geojson',
-  legend: 'Franja de totalidad'
+  legend: 'Franja de totalidad',
+  info: false,
+  popup: false
 }, { visibility: true });
 
-
+// ===== ESTILOS =====
 CCAA_LR.setStyle(new IDEE.style.Generic({
-polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
+  polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
 }));
 
 CCAA_NA.setStyle(new IDEE.style.Generic({
-polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
+  polygon: { fill: { color: 'red', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
 }));
 
 UMBRA.setStyle(new IDEE.style.Generic({
-polygon: { fill: { color: 'gray', opacity: 0.3 }, stroke: { color: 'white', width: 0.5 } }
+  polygon: { fill: { color: 'gray', opacity: 0.3 }, stroke: { color: 'white', width: 0.5 } }
 }));
 
 CCAA_LR.setZIndex(20);
 CCAA_NA.setZIndex(20);
 UMBRA.setZIndex(20);
-mapa.addLayers(CCAA_LR, CCAA_NA, UMBRA);
-//mapa.addLayers(CCAA_NA);
-//mapa.addLayers(UMBRA);
+
+// ¡CORRECCIÓN AQUÍ! Se añaden de una en una para que no falle
+mapa.addLayers(CCAA_LR);
+mapa.addLayers(CCAA_NA);
+mapa.addLayers(UMBRA);
 
 
-
-
-
-// ===== wmts =====
-//const ORTO_MA = new IDEE.layer.WMTS({
-//url: "https://www.ign.es/wmts/pnoa-ma",
-//name: "OI.OrthoimageCoverage",
-//matrixSet: "EPSG:25830",
-//legend: "Ortofoto PNOA máxima actualidad",
-//visibility: true
-//},
-//{
-//  format: 'image/png'
-//});
-//ORTO_MA.setZIndex(1);
-//mapa.addLayers(ORTO_MA);
-
-
+// ===== PLUGINS =====
 const layerSwitcher = new IDEE.plugin.Layerswitcher({ 
   collapsed: !0, 
   position: "BL", 
@@ -166,9 +157,55 @@ if (panel) {
   observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
 }
 
-window.addEventListener('load', function() {
-  setTimeout(toggleHeaderVisibility, 100);
-});
 
+// ===== FILTRO DEFINITIVO PARA EL RATÓN (MANITA Y POPUP) =====
+window.addEventListener('load', function() {
+  setTimeout(function() {
+    toggleHeaderVisibility();
+    
+    const olMap = mapa.getImpl();
+    if (!olMap) return;
+
+    // Guardamos las capas que queremos ignorar
+    const capasIgnoradas = [CCAA_LR.getImpl(), CCAA_NA.getImpl(), UMBRA.getImpl()];
+    
+    // Anulamos los 3 métodos que usa el mapa para interactuar
+    const metodos = ['hasFeatureAtPixel', 'forEachFeatureAtPixel', 'getFeaturesAtPixel'];
+    
+    metodos.forEach(metodo => {
+      const funcionOriginal = olMap[metodo];
+      if (funcionOriginal) {
+        olMap[metodo] = function(pixel, param2, param3) {
+          
+          let opciones, callback;
+          if (metodo === 'forEachFeatureAtPixel') {
+            callback = param2;
+            opciones = param3 || {};
+          } else {
+            opciones = param2 || {};
+          }
+          
+          const filtroOriginal = opciones.layerFilter;
+          
+          // Nuestro escudo protector: El ratón atraviesa los GeoJSON
+          opciones.layerFilter = function(layer) {
+            if (capasIgnoradas.includes(layer)) {
+              return false; // Bloqueado: No hay popup ni dedito
+            }
+            return filtroOriginal ? filtroOriginal(layer) : true; // Permitido (GeoTIFF)
+          };
+          
+          if (metodo === 'forEachFeatureAtPixel') {
+            return funcionOriginal.call(this, pixel, callback, opciones);
+          } else {
+            return funcionOriginal.call(this, pixel, opciones);
+          }
+        };
+      }
+    });
+
+  }, 500); 
+});
 </script>
 </body>
+</html>
