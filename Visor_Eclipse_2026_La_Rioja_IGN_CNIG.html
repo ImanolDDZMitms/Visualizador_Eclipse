@@ -59,7 +59,9 @@ container: 'mapa',
 zoom: 8,
 minZoom: 8,
 center: [-273000, 5220000], 
-controls: ['location', 'rotate']
+controls: ['location', 'rotate'],
+info: false,  // <-- BLOQUEA CUALQUIER CLICK EN EL MAPA
+popup: false  // <-- DESACTIVA EL GESTOR DE POPUPS GLOBAL
 });
 
 const CCAA_LR = new IDEE.layer.GeoJSON(
