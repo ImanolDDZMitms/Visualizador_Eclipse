@@ -62,6 +62,22 @@ center: [-273000, 5220000],
 controls: ['location', 'rotate'],
 });
 
+const capaCOG_LR = new IDEE.layer.GeoTIFF({    
+url: '/source/La_Rioja_Sombra_COG_WM.tif',
+name: 'Sombra La Rioja',
+legend: 'Sombra La Rioja ECLIPSE 2026',
+}, {visibility: true, opacity: 0.6 });
+capaCOG_LR.setZIndex(10);
+mapa.addLayers(capaCOG_LR);
+
+const capaCOG_NA = new IDEE.layer.GeoTIFF({    
+url: '/source/Navarra_Sombra_COG_WM.tif',
+name: 'Sombra Navarra',
+legend: 'Sombra Navarra ECLIPSE 2026',
+}, { visibility: true, opacity: 0.6 });
+capaCOG_NA.setZIndex(10);
+mapa.addLayers(capaCOG_NA);
+
 const CCAA_LR = new IDEE.layer.GeoJSON({
   name: "Comunidad Autónoma de La Rioja", 
   url: '/source/LA_RIOJA.geojson',
@@ -99,27 +115,13 @@ polygon: { fill: { color: 'gray', opacity: 0.3 }, stroke: { color: 'white', widt
 CCAA_LR.setZIndex(20);
 CCAA_NA.setZIndex(20);
 UMBRA.setZIndex(20);
-mapa.addLayers(CCAA_LR);
-mapa.addLayers(CCAA_NA);
-mapa.addLayers(UMBRA);
+mapa.addLayers(CCAA_LR, CCAA_NA, UMBRA);
+//mapa.addLayers(CCAA_NA);
+//mapa.addLayers(UMBRA);
 
 
 
-const capaCOG_LR = new IDEE.layer.GeoTIFF({    
-url: '/source/La_Rioja_Sombra_COG_WM.tif',
-name: 'Sombra La Rioja',
-legend: 'Sombra La Rioja ECLIPSE 2026',
-}, {visibility: true, opacity: 0.6 });
-capaCOG_LR.setZIndex(10);
-mapa.addLayers(capaCOG_LR);
 
-const capaCOG_NA = new IDEE.layer.GeoTIFF({    
-url: '/source/Navarra_Sombra_COG_WM.tif',
-name: 'Sombra Navarra',
-legend: 'Sombra Navarra ECLIPSE 2026',
-}, { visibility: true, opacity: 0.6 });
-capaCOG_NA.setZIndex(10);
-mapa.addLayers(capaCOG_NA);
 
 // ===== wmts =====
 //const ORTO_MA = new IDEE.layer.WMTS({
@@ -167,55 +169,9 @@ if (panel) {
   observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
 }
 
-//window.addEventListener('load', function() {
-//  setTimeout(toggleHeaderVisibility, 100);
-//});
-
 window.addEventListener('load', function() {
-  setTimeout(function() {
-    toggleHeaderVisibility();
-    
-    // Obtenemos el motor interno (OpenLayers)
-    const olMap = mapa.getImpl();
-    
-    if (olMap) {
-      // 1. Filtro para la "manita" del cursor (Hover)
-      const originalHasFeature = olMap.hasFeatureAtPixel;
-      olMap.hasFeatureAtPixel = function(pixel, options) {
-        const opt = options || {};
-        const originalFilter = opt.layerFilter;
-        
-        opt.layerFilter = function(layer) {
-          // Si la capa es LR, NA o UMBRA, la ignoramos por completo
-          if (layer === CCAA_LR.getImpl() || layer === CCAA_NA.getImpl() || layer === UMBRA.getImpl()) {
-            return false;
-          }
-          // Para el resto de capas (como los GeoTIFF), funciona normal
-          return originalFilter ? originalFilter(layer) : true;
-        };
-        
-        return originalHasFeature.call(this, pixel, opt);
-      };
-
-      // 2. Filtro para el Clic y el Popup
-      const originalForEach = olMap.forEachFeatureAtPixel;
-      olMap.forEachFeatureAtPixel = function(pixel, callback, options) {
-        const opt = options || {};
-        const originalFilter = opt.layerFilter;
-        
-        opt.layerFilter = function(layer) {
-          // Si la capa es LR, NA o UMBRA, la ignoramos para que no lance popup
-          if (layer === CCAA_LR.getImpl() || layer === CCAA_NA.getImpl() || layer === UMBRA.getImpl()) {
-            return false;
-          }
-          // Permitimos que lance popup para los GeoTIFF
-          return originalFilter ? originalFilter(layer) : true;
-        };
-        
-        return originalForEach.call(this, pixel, callback, opt);
-      };
-    }
-  }, 300); // Pequeño margen para asegurar que las capas han cargado
+  setTimeout(toggleHeaderVisibility, 100);
 });
+
 </script>
 </body>
