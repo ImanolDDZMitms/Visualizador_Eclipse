@@ -62,36 +62,54 @@ center: [-273000, 5220000],
 controls: ['location', 'rotate']
 });
 
-const CCAA_LR = new IDEE.layer.GeoJSON({
-name: "Comunidad Autónoma de La Rioja", 
-url: '/source/LA_RIOJA.geojson',
-legend: 'Comunidad Autónoma de La Rioja',
-popup: false,
-info: false
-}, 
-{visibility: true}
+const CCAA_LR = new IDEE.layer.GeoJSON(
+  {
+    name: "Comunidad Autónoma de La Rioja", 
+    url: '/source/LA_RIOJA.geojson',
+    legend: 'Comunidad Autónoma de La Rioja'
+  }, 
+  {
+    visibility: true,
+    selectable: false, 
+    popup: false,      
+    info: false        
+  }
 );
 
-const CCAA_NA = new IDEE.layer.GeoJSON({
-name: "Comunidad Foral de Navarra", 
-url: '/source/NAVARRA.geojson',
-legend: 'Comunidad Foral de Navarra',
-popup: false,
-info: false
-}, 
-{visibility: true}
+const CCAA_NA = new IDEE.layer.GeoJSON(
+  {
+    name: "Comunidad Foral de Navarra", 
+    url: '/source/NAVARRA.geojson',
+    legend: 'Comunidad Foral de Navarra'
+  }, 
+  {
+    visibility: true,
+    selectable: false,
+    popup: false,
+    info: false
+  }
 );
 
 
-const UMBRA = new IDEE.layer.GeoJSON({
-name: "Franja de totalidad", 
-url: '/source/UMBRA.geojson',
-legend: 'Franja de totalidad',
-popup: false,
-info: false
-}, 
-{visibility: true}
+
+const UMBRA = new IDEE.layer.GeoJSON(
+  {
+    name: "Franja de totalidad", 
+    url: '/source/UMBRA.geojson',
+    legend: 'Franja de totalidad'
+  }, 
+  {
+    visibility: true,
+    selectable: false, 
+    popup: false,
+    info: false
+  }
 );
+
+
+
+
+
 
 CCAA_LR.setStyle(new IDEE.style.Generic({
 polygon: { fill: { color: 'green', opacity: 0 }, stroke: { color: 'orange', width: 3 } }
