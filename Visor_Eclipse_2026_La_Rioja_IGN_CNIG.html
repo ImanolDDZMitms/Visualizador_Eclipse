@@ -105,10 +105,7 @@ mapa.addLayers(CCAA_LR);
 mapa.addLayers(CCAA_NA);
 mapa.addLayers(UMBRA);
 
-// Forzar a nivel interno (OpenLayers) que el ratón ignore por completo estas capas
-CCAA_LR.getImpl().set('interactive', false);
-CCAA_NA.getImpl().set('interactive', false);
-UMBRA.getImpl().set('interactive', false);
+
 
 const capaCOG_LR = new IDEE.layer.GeoTIFF({    
 url: '/source/La_Rioja_Sombra_COG_WM.tif',
@@ -175,5 +172,10 @@ if (panel) {
 window.addEventListener('load', function() {
   setTimeout(toggleHeaderVisibility, 100);
 });
+
+// Forzar a nivel interno (OpenLayers) que el ratón ignore por completo estas capas
+CCAA_LR.getImpl().set('interactive', false);
+CCAA_NA.getImpl().set('interactive', false);
+UMBRA.getImpl().set('interactive', false);
 </script>
 </body>
