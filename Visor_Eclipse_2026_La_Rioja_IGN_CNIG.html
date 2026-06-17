@@ -63,34 +63,31 @@ controls: ['location', 'rotate']
 });
 
 const CCAA_LR = new IDEE.layer.GeoJSON({
-interactive: false,
 name: "Comunidad Autónoma de La Rioja", 
 url: '/source/LA_RIOJA.geojson',
 legend: 'Comunidad Autónoma de La Rioja',
-interactions:'false' 
+queryable: false,
 }, 
-{visibility: true, queryable: false}
+{visibility: true}
 );
 
 const CCAA_NA = new IDEE.layer.GeoJSON({
-interactive: false,
 name: "Comunidad Foral de Navarra", 
 url: '/source/NAVARRA.geojson',
 legend: 'Comunidad Foral de Navarra',
-interactions:'false' 
+queryable: false,
 }, 
-{visibility: true, queryable: false}
+{visibility: true}
 );
 
 
 const UMBRA = new IDEE.layer.GeoJSON({
-interactive: false,
 name: "Franja de totalidad", 
 url: '/source/UMBRA.geojson',
 legend: 'Franja de totalidad',
-interaction
+queryable: false,
 }, 
-{visibility: true, queryable: false}
+{visibility: true}
 );
 
 CCAA_LR.setStyle(new IDEE.style.Generic({
