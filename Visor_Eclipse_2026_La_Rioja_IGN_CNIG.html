@@ -150,9 +150,10 @@ mapa.addLayers(capaCOG_NA);
 
 const mousesrs = new IDEE.plugin.MouseSRS({
 position: 'TR',
+tooltip: 'Muestra coordenadas',
 srs: 'EPSG:4326',
 label: 'WGS84 (lat, lon)',
-precision: 4
+precision: 4,
 });
 mapa.addPlugin(mousesrs);
 
@@ -167,7 +168,7 @@ tools: ["transparency", "legend", "zoom", "style", "delete"],
 isMoveLayers: !0, 
 https: !0, 
 http: !0, 
-showCatalog: !1 
+showCatalog: !1, 
 });
 mapa.addPlugin(layerSwitcher);
 
