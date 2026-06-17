@@ -166,38 +166,9 @@ if (panel) {
   observer.observe(panel, { attributes: true, attributeFilter: ['class'] });
 }
 
-//window.addEventListener('load', function() {
-//  setTimeout(toggleHeaderVisibility, 100);
-//});
-
 window.addEventListener('load', function() {
-  setTimeout(function() {
-    toggleHeaderVisibility();
-    
-    // Obtenemos el motor del mapa
-    const olMap = mapa.getImpl();
-    if (!olMap) return;
-
-    // Lista de las capas que queremos que sean "fantasmas" para el ratón
-    const capasFantasma = [CCAA_LR.getImpl(), CCAA_NA.getImpl(), UMBRA.getImpl()];
-
-    // Guardamos las funciones originales del mapa
-    const originalHover = olMap.hasFeatureAtPixel;
-    const originalClick = olMap.forEachFeatureAtPixel;
-
-    // 1. Filtro para la manita del ratón
-    olMap.hasFeatureAtPixel = function(pixel, options = {}) {
-      options.layerFilter = layer => !capasFantasma.includes(layer);
-      return originalHover.call(this, pixel, options);
-    };
-
-    // 2. Filtro para el clic y el popup
-    olMap.forEachFeatureAtPixel = function(pixel, callback, options = {}) {
-      options.layerFilter = layer => !capasFantasma.includes(layer);
-      return originalClick.call(this, pixel, callback, options);
-    };
-
-  }, 300);
+  setTimeout(toggleHeaderVisibility, 100);
 });
+
 </script>
 </body>
