@@ -148,12 +148,14 @@ mapa.addLayers(capaCOG_NA);
 //mapa.addLayers(ORTO_MA);
 
 
-mapa.addPlugin(new IDEE.plugin.MouseSRS({
-position: 'BL',
+const mousesrs(new IDEE.plugin.MouseSRS({
+position: 'BC',
 srs: 'EPSG:4326',
 label: 'WGS84 (lat, lon)',
 precision: 4,
 }));
+mapa.addPlugin(mousesrs);
+
 
 const layerSwitcher = new IDEE.plugin.Layerswitcher({ 
 collapsed: !0, 
