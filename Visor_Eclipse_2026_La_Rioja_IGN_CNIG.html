@@ -64,50 +64,23 @@ info: false,  // <-- BLOQUEA CUALQUIER CLICK EN EL MAPA
 popup: false  // <-- DESACTIVA EL GESTOR DE POPUPS GLOBAL
 });
 
-const CCAA_LR = new IDEE.layer.GeoJSON(
-  {
-    name: "Comunidad Autónoma de La Rioja", 
-    url: '/source/LA_RIOJA.geojson',
-    legend: 'Comunidad Autónoma de La Rioja'
-  }, 
-  {
-    visibility: true,
-    selectable: false, 
-    popup: false,      
-    info: false        
-  }
-);
+const CCAA_LR = new IDEE.layer.GeoJSON({
+  name: "Comunidad Autónoma de La Rioja", 
+  url: '/source/LA_RIOJA.geojson',
+  legend: 'Comunidad Autónoma de La Rioja'
+}, { visibility: true });
 
-const CCAA_NA = new IDEE.layer.GeoJSON(
-  {
-    name: "Comunidad Foral de Navarra", 
-    url: '/source/NAVARRA.geojson',
-    legend: 'Comunidad Foral de Navarra'
-  }, 
-  {
-    visibility: true,
-    selectable: false,
-    popup: false,
-    info: false
-  }
-);
+const CCAA_NA = new IDEE.layer.GeoJSON({
+  name: "Comunidad Foral de Navarra", 
+  url: '/source/NAVARRA.geojson',
+  legend: 'Comunidad Foral de Navarra'
+}, { visibility: true });
 
-
-
-const UMBRA = new IDEE.layer.GeoJSON(
-  {
-    name: "Franja de totalidad", 
-    url: '/source/UMBRA.geojson',
-    legend: 'Franja de totalidad'
-  }, 
-  {
-    visibility: true,
-    selectable: false, 
-    popup: false,
-    info: false
-  }
-);
-
+const UMBRA = new IDEE.layer.GeoJSON({
+  name: "Franja de totalidad", 
+  url: '/source/UMBRA.geojson',
+  legend: 'Franja de totalidad'
+}, { visibility: true });
 
 
 
@@ -132,6 +105,10 @@ mapa.addLayers(CCAA_LR);
 mapa.addLayers(CCAA_NA);
 mapa.addLayers(UMBRA);
 
+// Forzar a nivel interno (OpenLayers) que el ratón ignore por completo estas capas
+CCAA_LR.getImpl().set('interactive', false);
+CCAA_NA.getImpl().set('interactive', false);
+UMBRA.getImpl().set('interactive', false);
 
 const capaCOG_LR = new IDEE.layer.GeoTIFF({    
 url: '/source/La_Rioja_Sombra_COG_WM.tif',
