@@ -12,13 +12,10 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <!-- ===== CSS API‑IDEE ===== -->
 <link  href="https://componentes.idee.es/api-idee/assets/css/apiidee.ol.min.css" rel="stylesheet"/>
 
-<!-- ===== MOUSERSRS ===== -->
-<link href="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs.ol.min.css" rel="stylesheet" />
-
 <!-- ===== LAYERSWITCHER ===== -->
 <link href="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.css" rel="stylesheet" />
 
-<!-- ===== CUSTOM STYLES ===== -->
+<!-- ===== MY STYLES ===== -->
 <link href="/style/styles.css" rel="stylesheet" />
 </head>
 
@@ -54,7 +51,6 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
 <script src="https://componentes.idee.es/api-idee/js/apiidee.ol.min.js"></script>
 <script src="https://componentes.idee.es/api-idee/js/configuration.js"></script>
 
-<script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/mousesrs/mousesrs.ol.min.js"></script>
 <script type="text/javascript" src="https://componentes.idee.es/api-idee/plugins/layerswitcher/layerswitcher.ol.min.js"></script>
 
 <script>
@@ -148,27 +144,17 @@ mapa.addLayers(capaCOG_NA);
 //mapa.addLayers(ORTO_MA);
 
 
-const mousesrs = new IDEE.plugin.MouseSRS({
-position: 'TR',
-tooltip: 'Muestra coordenadas',
-srs: 'EPSG:4326',
-label: 'WGS84 (lat, lon)',
-precision: 4,
-});
-mapa.addPlugin(mousesrs);
-
-
 const layerSwitcher = new IDEE.plugin.Layerswitcher({ 
-collapsed: !0, 
-position: "BL", 
-collapsible: !0, 
-isDraggable: !1, 
-modeSelectLayers: "eyes", 
-tools: ["transparency", "legend", "zoom", "style", "delete"], 
-isMoveLayers: !0, 
-https: !0, 
-http: !0, 
-showCatalog: !1, 
+  collapsed: !0, 
+  position: "BL", 
+  collapsible: !0, 
+  isDraggable: !1, 
+  modeSelectLayers: "eyes", 
+  tools: ["transparency", "legend", "zoom", "style", "delete"], 
+  isMoveLayers: !0, 
+  https: !0, 
+  http: !0, 
+  showCatalog: !1, 
 });
 mapa.addPlugin(layerSwitcher);
 
