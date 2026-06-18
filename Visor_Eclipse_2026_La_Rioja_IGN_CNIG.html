@@ -34,7 +34,7 @@ content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable
       <img src="/source/INFO.png" alt="Info">
     </a>
     <div class="titulo-ign">Servicio regional del IGN en La Rioja y Navarra</div>
-    <a href="/source/advertencia_importante.png" target="_blank" class="btn-alert-png" title="Advertencia importante">
+    <a href="/source/advertencia_importante.pdf" target="_blank" class="btn-alert-pdf" title="Advertencia importante">
       <img src="/source/ATENCIÓN.png" alt="Atención">
     </a>
   </div>
@@ -114,25 +114,6 @@ UMBRA.setZIndex(20);
 mapa.addLayers(CCAA_LR);
 mapa.addLayers(CCAA_NA);
 mapa.addLayers(UMBRA);
-
-
-
-
-
-// ===== wmts =====
-//const ORTO_MA = new IDEE.layer.WMTS({
-//url: "https://www.ign.es/wmts/pnoa-ma",
-//name: "OI.OrthoimageCoverage",
-//matrixSet: "EPSG:25830",
-//legend: "Ortofoto PNOA máxima actualidad",
-//visibility: true
-//},
-//{
-//  format: 'image/png'
-//});
-//ORTO_MA.setZIndex(1);
-//mapa.addLayers(ORTO_MA);
-
 
 const layerSwitcher = new IDEE.plugin.Layerswitcher({ 
   collapsed: !0, 
