@@ -310,3 +310,25 @@ height: 100%;
 object-fit: cover;
 display: block;
 }
+// TEXTO PIE DE VISUALIZADOR ECLIPSE
+
+.footer-text {
+position: fixed;
+bottom: 0;
+left: 0;
+width: 100%;
+text-align: center;
+padding: 10px 0;
+background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para mejor legibilidad */
+z-index: 1000; /* Asegura que esté por encima de otros elementos */
+font-family: Arial, sans-serif; /* Puedes cambiar la fuente si lo deseas */
+font-size: 1.2em;
+}
+.footer-text .date {
+color: black;
+font-weight: bold;
+}
+.footer-text .event {
+color: #A0522D; /* Color siena */
+font-weight: bold;
+}
