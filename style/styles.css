@@ -313,22 +313,32 @@ display: block;
 // TEXTO PIE DE VISUALIZADOR ECLIPSE
 
 .footer-text {
-position: fixed;
-bottom: 0;
-left: 0;
-width: 100%;
-text-align: center;
-padding: 10px 0;
-background-color: rgba(255, 255, 255, 0.8); /* Fondo semi-transparente para mejor legibilidad */
-z-index: 1000; /* Asegura que esté por encima de otros elementos */
-font-family: Arial, sans-serif; /* Puedes cambiar la fuente si lo deseas */
-font-size: 1.2em;
-}
-.footer-text .date {
-color: black;
-font-weight: bold;
-}
-.footer-text .event {
-color: #A0522D; /* Color siena */
-font-weight: bold;
-}
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    text-align: center; /* ESTO CENTRA EL TEXTO HORIZONTALMENTE */
+    padding: 10px 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    z-index: 1000;
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.1);
+  }
+
+  /* Media query para móviles (ancho máximo de 767px) */
+  @media (max-width: 767px) {
+    .footer-text {
+      font-size: 0.85em;
+      padding: 6px 0;
+    }
+  }
+
+  .footer-text .date {
+    color: black;
+    font-weight: bold;
+  }
+  .footer-text .event {
+    color: #A0522D; /* Color siena */
+    font-weight: bold;
+  }
