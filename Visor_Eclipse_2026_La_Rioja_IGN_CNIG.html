@@ -66,6 +66,22 @@ center: [-273000, 5220000],
 controls: ['location', 'rotate'],
 });
 
+const capaCOG_BUSTAR = new IDEE.layer.GeoTIFF({    
+url: '/source/BUSTARVIEJO_COG.tif',
+name: 'Sombra BUSTARVIEJO',
+legend: 'Sombra BUSTARVIEJO ECLIPSE 2026',
+}, { visibility: true, opacity: 0.6 });
+capaCOG_BUSTAR.setZIndex(10);
+mapa.addLayers(capaCOG_BUSTAR);
+
+const capaCOG_CADE = new IDEE.layer.GeoTIFF({    
+url: '/source/CADERECHAS_COG.tif',
+name: 'Sombra CADERECHAS',
+legend: 'Sombra CADERECHAS ECLIPSE 2026',
+}, { visibility: true, opacity: 0.6 });
+capaCOG_CADE.setZIndex(10);
+mapa.addLayers(capaCOG_CADE);
+  
 const capaCOG_LR = new IDEE.layer.GeoTIFF({    
 url: '/source/La_Rioja_Sombra_COG_WM.tif',
 name: 'Sombra La Rioja',
