@@ -66,6 +66,30 @@ center: [-273000, 5220000],
 controls: ['location', 'rotate'],
 });
 
+const capaCOG_ARRASATE = new IDEE.layer.GeoTIFF({    
+url: '/source/ARRASATE_COG.tif',
+name: 'Sombra ARRASATE',
+legend: 'Sombra ARRASATE ECLIPSE 2026',
+}, { visibility: true, opacity: 0.6 });
+capaCOG_ARRASATE.setZIndex(10);
+mapa.addLayers(capaCOG_ARRASATE);
+
+const capaCOG_GUADA = new IDEE.layer.GeoTIFF({    
+url: '/source/GUADA_COG.tif',
+name: 'Sombra GUADA',
+legend: 'Sombra GUADA ECLIPSE 2026',
+}, { visibility: true, opacity: 0.6 });
+capaCOG_GUADA.setZIndex(10);
+mapa.addLayers(capaCOG_GUADA);
+
+const capaCOG_PONTEVEDRA = new IDEE.layer.GeoTIFF({    
+url: '/source/PONTEVEDRA_COG.tif',
+name: 'Sombra PONTEVEDRA',
+legend: 'Sombra PONTEVEDRA ECLIPSE 2026',
+}, {visibility: true, opacity: 0.6 });
+capaCOG_PONTEVEDRA.setZIndex(10);
+mapa.addLayers(capaCOG_PONTEVEDRA);
+
 const capaCOG_BUSTAR = new IDEE.layer.GeoTIFF({    
 url: '/source/BUSTARVIEJO_COG.tif',
 name: 'Sombra BUSTARVIEJO',
